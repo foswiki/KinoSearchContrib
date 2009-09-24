@@ -33,6 +33,10 @@ $Foswiki::cfg{KinoSearchContrib}{SummaryLength} = '300';
 $Foswiki::cfg{KinoSearchContrib}{MaxLimit} = '2000';
 
 # **BOOLEAN**
+# If using Kino as your {RCS}{SearchAlgorithm}, enable this to search attachments
+$Foswiki::cfg{KinoSearchContrib}{showAttachments} = '0';
+
+# **BOOLEAN**
 # Provide a link in the templates to search attachments only
 $Foswiki::cfg{KinoSearchContrib}{SearchAttachmentsOnly} = '0';
 
