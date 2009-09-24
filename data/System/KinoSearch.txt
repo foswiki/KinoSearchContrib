@@ -1,0 +1,44 @@
+%META:TOPICINFO{author="ProjectContributor" date="1199357925" format="1.1" reprev="1.3" version="$Rev: 5129 $"}%
+%META:TOPICPARENT{name="KinoSearchContrib"}%
+---+ %WIKITOOLNAME% Search
+
+<div class="foswikiPageForm">
+<form action="%SCRIPTURLPATH%/kinosearch%SCRIPTSUFFIX%/%INTURLENCODE{"%INCLUDINGWEB%"}%/">
+   <input type="text" name="search" size="32" maxlength="255" class="foswikiInputField" /> <input type="submit" value="Search text" class="foswikiSubmit" onClick="if (search.value.length < 2) {alert('Search string must have at least 2 characters'); return false;} return true;" />
+   in <select name="web" class="foswikiSelect">
+     <option value="all">all public webs</option>
+     <option value="%INCLUDINGWEB%">current web</option>
+%WEBLIST{"     <option>$name</option>"}%
+   </select> <p />
+   %TWISTYBUTTON{ id="searchOptions" showlink="<strong>&#43; Show search options...</strong>" hidelink="<strong>&#8722; Hide search options</strong>" remember="on"}%
+   %TWISTYTOGGLE{ id="searchOptions" }%
+   <br />
+   <input type="checkbox" class="foswikiCheckbox" id="nosummary" name="nosummary" %IF{"'on' = $nosummary" then="checked"}% /> <label for="nosummary"> %MAKETEXT{"Do not show summaries"}%</label> <br/>
+   <input type="checkbox" class="foswikiCheckbox" id="nototal" name="nototal" %IF{"'on' = $nototal" then="checked"}% /> <label for="nototal" >%MAKETEXT{"Do not show total matches"}%</label> <br/>
+   <input type="checkbox" class="foswikiCheckbox" id="showlock" name="showlock" %IF{"'on' = $showlock" then="checked"}% /> <label for="showlock">%MAKETEXT{"Show locked topics"}%</label><br/>
+   <label for="limit">%MAKETEXT{"Limit result count to"}%</label> <input type="text" id="limit" name="limit" size="5" class="foswikiInputField" value="%URLPARAM{"limit" default="100"}%" />
+   %ENDTWISTYTOGGLE%
+</form>
+</div>
+
+---++ Query Syntax
+
+   * To search for a word, just put that word into the Search box.
+   * To search for a phrase, put the phrase in "double quotes".
+   * Use the ==+== and ==-== operators, just as in Google query syntax, to indicate _required_ and _forbidden_ terms, respectively.
+   * To search on metadata, prefix the search term with ==field:== where _&lt;field&gt;_ is the field name in the metadata (for instance, _author_).
+
+---+++ Query Examples
+
+   * ==text:kino== or just ==kino==
+   * ==text:"search engine"== or just =="search engine"==
+   * ==author:%WIKINAME%== to search for a wiki author, use their WikiName
+   * ==form:WebFormName== to get all topics with that form attached.
+   * ==type:doc== to get all attachments of given type
+   * ==web:Sandbox== to get all the topics in a given web
+   * ==topic:WebHome== to get all the topics of a given name
+   * ==+web:Sandbox +topic:Test== to get all the topics containing "Test" in their titles and belonging to the Sandbox web.
+
+_Note:_ the current version of !KinoSearch does not support wildcards.
+
+__See also:__ %SYSTEMWEB%.KinoSearchContrib

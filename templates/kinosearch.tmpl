@@ -1,0 +1,51 @@
+%TMPL:INCLUDE{"view"}%
+%TMPL:DEF{"titleaction"}%%MAKETEXT{"(search results)"}% %TMPL:END%
+
+
+
+%TMPL:DEF{"webaction"}% %WEBTOPICLIST% %TMPL:END%
+
+
+
+%TMPL:DEF{"topicaction"}%%TMPL:END%
+%TMPL:DEF{"toolbar_buttons"}%%TMPL:END%
+
+%TMPL:DEF{"bodyclassname"}%patternSearchResultsPage%TMPL:END%
+
+
+
+%TMPL:DEF{"repeatedsearchblock"}%<h4 class="patternSearchResultsHeader" style="background-color:%WEBBGCOLOR%"><span class="foswikiLeft">%MAKETEXT{"Search results"}%</span><span class="foswikiRight">%MAKETEXT{"retrieved at [_1]" args="%DISPLAYTIME{"$hour:$min ($tz)"}%"}%</span><br class="foswikiClear" /></h4>
+%REPEAT%<div class="patternSearchResult"><div class="foswikiTopRow"><div class="foswikiLeft">%ICON% <b>%MATCH%</b> %SCORE%<span class="foswikiAlert">%LOCKED%</span></div><div class="foswikiRight foswikiSRAuthor"> %AUTHOR%</div><div class="foswikiRight foswikiSRRev">%REVISION% - <a href="%SCRIPTURLPATH{"rdiff"}%/%WEB%/%TOPICNAME%" rel='nofollow'>%TIME%</a>&nbsp;</div><br class="foswikiClear" /></div><div class="foswikiBottomRow"><div class="foswikiSummary foswikiBlackText">%TEXTHEAD%</div></div></div>%REPEAT%%TMPL:END%
+
+
+
+%TMPL:DEF{"searchbody"}%%SPLIT%%TMPL:P{"repeatedsearchblock"}%%SPLIT%
+<div class="patternSearchResultCount"><span class="foswikiLeft">%MAKETEXT{"Number of topics:"}% <b>%NTOPICS%</b></span><span class="foswikiRight">%ICON{feed}% <a href='?%QUERYSTRING%;skin=none;rss=on'>Subscribe to these results</a></span></div>%TMPL:END%
+
+
+
+%TMPL:DEF{"content"}%
+%SPLIT%
+<h1>%WIKITOOLNAME% Search</h1>
+<div class="foswikiPageForm">
+<form action="%SCRIPTURLPATH%/kinosearch%SCRIPTSUFFIX%/%INTURLENCODE{"%INCLUDINGWEB%"}%/">
+   <input type="text" name="search" size="40" maxlength="255" value="%SEARCHSTRING%" class="foswikiInputField%IF{"'%URLPARAM{"search"}%'" else=" foswikiFocus"}%" /> <input type="submit" value="Search text" class="foswikiSubmit" onClick="if (search.value.length < 2) {alert('Search string must have at least 2 characters'); return false;} return true;" />
+   in <select name="web" class="foswikiSelect">
+     <option value="all">all public webs</option>
+     <option value="%INCLUDINGWEB%">current web</option>
+%WEBLIST{"     <option>$name</option>"}%
+   </select> <span class="foswikiSeparator"> | </span> <a href="%SCRIPTURLPATH{"view"}%/%SYSTEMWEB%/KinoSearch">Help</a> <p />
+   %TWISTYBUTTON{ id="searchOptions" showlink="<strong>&#43; Show search options...</strong>" hidelink="<strong>&#8722; Hide search options</strong>" remember="on"}%
+   %TWISTYTOGGLE{ id="searchOptions" }%
+   <br />
+   <input type="checkbox" class="foswikiCheckbox" id="nosummary" name="nosummary" %IF{"'on' = $nosummary" then="checked"}% /> <label for="nosummary"> %MAKETEXT{"Do not show summaries"}%</label> <br/>
+   <input type="checkbox" class="foswikiCheckbox" id="nototal" name="nototal" %IF{"'on' = $nototal" then="checked"}% /> <label for="nototal" >%MAKETEXT{"Do not show total matches"}%</label> <br/>
+   <input type="checkbox" class="foswikiCheckbox" id="showlock" name="showlock" %IF{"'on' = $showlock" then="checked"}% /> <label for="showlock">%MAKETEXT{"Show locked topics"}%</label><br/>
+   <label for="limit">%MAKETEXT{"Limit result count to"}%</label> <input type="text" id="limit" name="limit" size="5" class="foswikiInputField" value="%URLPARAM{"limit" default="100"}%" />
+   %ENDTWISTYTOGGLE%
+</form>
+<p />
+</div>
+<div class="patternSearchString">%MAKETEXT{"Searched:"}% <b><nop>%SEARCHSTRING%</b> %SEARCHATTACHMENTSONLY%</div><div class="patternSearchResultsBegin"></div>
+%TMPL:P{"searchbody"}%%SPLIT%
+%TMPL:END%

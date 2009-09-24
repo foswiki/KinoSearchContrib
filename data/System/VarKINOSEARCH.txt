@@ -1,0 +1,14 @@
+%META:TOPICINFO{author="ProjectContributor" date="1207714807" format="1.1" version="$Rev: 4915 $"}%
+%META:TOPICPARENT{name="Macros"}%
+
+---+++ KINOSEARCH tag
+If the SearchEngineKinoSearchPlugin is enabled, you will be able to use the KINOSEARCH tag to search indexed topics and attachments:
+   * =%<nop>KINOSEARCH{'Search String' format='Formatting string'}%=
+   
+format takes the following variables to place content.
+   * $icon - An icon to display filetype when showing attachments
+   * $match - The name of the page being displayed
+   * $locked - Show if a page is locked
+   * $texthead - Summary text
+   
+See: SearchEngineKinoSearchAddOn and SearchEngineKinoSearchPlugin

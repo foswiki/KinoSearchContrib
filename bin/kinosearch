@@ -1,0 +1,41 @@
+#!/usr/bin/perl -wT
+#
+# Copyright (C) 2007 Markus Hesse
+# Copyright (C) 2009 Foswiki Contributors
+#
+# For licensing info read LICENSE file in the Foswiki root.
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details, published at 
+# http://www.gnu.org/copyleft/gpl.html
+
+# Set library paths in @INC, at compile time
+
+use strict;
+use warnings;
+
+BEGIN {
+    if ( defined $ENV{GATEWAY_INTERFACE} ) {
+        $Foswiki::cfg{Engine} = 'Foswiki::Engine::CGI';
+        use CGI::Carp qw(fatalsToBrowser);
+        $SIG{__DIE__} = \&CGI::Carp::confess;
+    }
+    else {
+        $Foswiki::cfg{Engine} = 'Foswiki::Engine::CLI';
+        require Carp;
+        $SIG{__DIE__} = \&Carp::confess;
+    }
+    $ENV{FOSWIKI_ACTION} = 'kinosearch';
+    @INC = ('.', grep { $_ ne '.' } @INC);
+    require 'setlib.cfg';
+}
+
+use Foswiki;
+use Foswiki::UI;
+$Foswiki::engine->run();

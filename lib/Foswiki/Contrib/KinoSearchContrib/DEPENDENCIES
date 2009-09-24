@@ -1,0 +1,16 @@
+KinoSearch,>0,cpan,Required
+File::MMagic,>0,cpan,Required
+Module::Pluggable,>0,cpan,Required
+HTML::TreeBuilder,>0,cpan,Required
+Spreadsheet::ParseExcel,>0,cpan,Required for =.xls= files
+Spreadsheet::XLSX,>0,cpan,Required for =.xlsx= files
+CharsetDetector,>0,cpan,Required
+Encode,>0,cpan,Required
+Error,>0,cpan,Required
+ppthtml,>0,c,Required for indexing =.ppt= files. Part of xlhtml
+pdftotext,>0,c,Required for indexing =.pdf=. Part of xpdf-utils
+antiword,>0,c,One of antiword, abiword or wvWare is required for =.doc= files
+abiword,>0,c,One of antiword, abiword or wvWare is required for =.doc= files
+wvWare,>0,c,One of antiword, abiword or wvWare is required for =.doc= files
+docx2txt,>0,perl,Required for =.docx= files. Available from http://sourceforge.net/projects/docx2txt/
+pptx2txt,>0,perl,Required for =.pptx= files. Available from http://sourceforge.net/projects/pptx2txt/

@@ -1,0 +1,8 @@
+%META:TOPICINFO{author="ProjectContributor" date="1208389508" format="1.1" version="$Rev: 4923 $"}%
+%META:TOPICPARENT{name="TipsOfTheDay"}%
+
+---+ Kino Search Operators
+
+Kino Search allows you to use Google style operators to narrow down your search. For example, use the ==+== and ==-== operators to indicate _required_ and _forbidden_ terms, or use ==type:doc== to get all attachments of given type. For more information, see the [[%SYSTEMWEB%.KinoSearch][search help topic]].
+
+[[TipsOfTheDay][See More Tips...]]
