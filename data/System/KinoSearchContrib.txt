@@ -1,10 +1,10 @@
 %META:TOPICINFO{author="ProjectContributor" date="1208389508" format="1.1" version="$Rev: 5131 $"}%
-%META:TOPICPARENT{name="Plugins"}%
+%META:TOPICPARENT{name="Contribs"}%
 ---+ Kino Search Contrib
 
 %TOC%
 
-[[http://www.rectangular.com/kinosearch/][KinoSearch]] is a Perl implementation of the [[http://lucene.apache.org/java/docs/][Apache Lucene]] search engine (implemented in Java). This is the implementation of this indexed search engine for Foswiki. With !KinoSearch you create an index over all webs including attachments like Word, Excel and PDF. Based on that you get a really fast search over all topics and the attachments. You need this add-on if:
+[[http://www.rectangular.com/kinosearch/][KinoSearch]] is a Perl implementation of the [[http://lucene.apache.org/java/docs/][Apache Lucene]] search engine (implemented in Java). This is the implementation of this indexed search engine for Foswiki. With !KinoSearch you create an index over all webs including attachments like Word, Excel and PDF. Based on that you get a really fast search over all topics and the attachments. You need this contrib if:
    * your wiki has grown so big, that default search is too slow or
    * you want to do search not only on the topics but also the attachments.
 
@@ -22,9 +22,9 @@ The =kinosearch= script uses a template called =kinosearch.tmpl= to render the r
 
 There is also the *[[KinoSearch]]* topic with a form ready to use with the =kinosearch= script.
 
-If you have the Foswiki:Extensions/SearchEngineKinoSearchPlugin, you can use the rest handler instead. The syntax is identical to the =kinosearch= script.
-   * =%SCRIPTURL{rest}%/SearchEngineKinoSearchPlugin/search=
-   * =cd foswiki/bin ; ./rest <nop>SearchEngineKinoSearchPlugin.search=
+If you have the Foswiki:Extensions/KinoSearchPlugin, you can use the rest handler instead. The syntax is identical to the =kinosearch= script.
+   * =%SCRIPTURL{rest}%/KinoSearchPlugin/search=
+   * =cd foswiki/bin ; ./rest <nop>KinoSearchPlugin.search=
 
 __Note:__ Rest handlers currently require the user to be authenticated. If you want unauthenticated users to search, use the =kinosearch= script instead.
    
@@ -128,7 +128,7 @@ Then set the command path to these tools in =configure=.
 
 %$INSTALL_INSTRUCTIONS%
 
-You only need the Foswiki:Extensions/SearchEngineKinoSearchPlugin if you are using the =rest= handlers, or the =%<nop>KINOSEARCH%= macro. Otherwise you are fine without it.
+You only need the Foswiki:Extensions/KinoSearchPlugin if you are using the =rest= handlers, or the =%<nop>KINOSEARCH%= macro. Otherwise you are fine without it.
 
 ---+++ Configuration
 
@@ -174,7 +174,7 @@ text seems to be O.K.
 
 ---+++ Upgrading From !SearchEngineKinoSearchAddOn
 
-If you previously used the SearchEngineKinoSearchAddOn (either on TWiki or on Foswiki), you will have noticed that this has been repackaged as a Contrib in line with Foswiki standards. The plugin is available seperately at Foswiki:Extensions/KinoSearchPlugin
+If you previously used the !SearchEngineKinoSearchAddOn (either on TWiki or on Foswiki), you will have noticed that this has been repackaged as a Contrib in line with Foswiki standards. The plugin is available seperately at Foswiki:Extensions/KinoSearchPlugin
 
 You will also need to move your settings from [[%LOCALSITEPREFS%]] into =configure=.
 
@@ -193,7 +193,7 @@ The indexing of attached documents is realised in two steps:
    1 the content of the document is changed to an ASCII string. This is called stringification. 
    1 this ASCII string is indexed with <nop>KinoSearch. This is the normal way in all index applications.  
 
-To index different types of documents, it is necessary to have specialised stringifiers, i.e. classes to extract the ASCII text out of the document.  In this add-on, a plug-in mechanism is implemented, so that additional stringifiers can be added without changing the existing code. All stringifier plugins are stored in the directory =lib/Foswiki/Contrib/KinoSearchContrib/StringifierPlugins=. 
+To index different types of documents, it is necessary to have specialised stringifiers, i.e. classes to extract the ASCII text out of the document.  In this contrib, a plug-in mechanism is implemented, so that additional stringifiers can be added without changing the existing code. All stringifier plugins are stored in the directory =lib/Foswiki/Contrib/KinoSearchContrib/StringifierPlugins=. 
 
 You can add new stringifier plugins by just adding new files here. The minimum things to be implemented are:
    * The plugin must inherit from =Foswiki::Contrib::KinoSearchContrib::StringifyBase=
@@ -216,7 +216,7 @@ All the stringifiers have unit tests associated with them, and we would encourag
 |  24 Sep 2009:  | v 1.21, Foswikitask:Item1363: port to Foswiki -- Foswiki:Main.WillNorris. Rename to !KinoSearchContrib and split plugin into !KinoSearchPlugin; add stringifiers for =.docx=, =.pptx= and =.xlsx=; change the =kinosearch= script to work with [[Foswiki:Development.FoswikiStandAlone][FSA]]; Moved settings into =configure=; Commands now set in =configure=; Replaced =system()= calls with =Foswiki::Sandbox->sysCommand()=; Handle passworded MS Office files; Make the index more robust if it somehow encounters binary files; Can now specify skipped topics; updated and simplified docs; added doc for TipsContrib; update templates; Foswikitask:Item8246: fix checking of access controls -- Foswiki:Main.AndrewJones |
 |  06 Nov 2008:  | v 1.20, minor revert to stop crash |
 |  05 Nov 2008:  | v 1.19, fixes for (nex)twiki/trunk |
-|  20 Aug 2008:  | v 1.18, added Integrated SEARCH, SearchEngineKinoSearchPlugin, restHandlers, updated code and tests -- Foswiki:Main.SvenDowideit |
+|  20 Aug 2008:  | v 1.18, added Integrated SEARCH, !SearchEngineKinoSearchPlugin, restHandlers, updated code and tests -- Foswiki:Main.SvenDowideit |
 |  6 Aug 2008:   | v 1.17, TWikibug:Item5717: persist use form choices, TWikibug:Item5647: cope better with attachment problems -- Foswiki:Main.SvenDowideit |
 |  4 Jun 2008:   | v 1.16, TWikibug:Item5646: Problem with attachments with capital letter suffix |
 |  12 May 2008:  | v 1.15, TWikibug:Item5579, TWikibug:Item5580, TWikibug:Item5619: Problem with ALLOWWEBVIEW and Forms fixed |
