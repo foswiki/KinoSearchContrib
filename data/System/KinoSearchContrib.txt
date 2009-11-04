@@ -124,7 +124,7 @@ To index these file types, you will need to install the following tools from Sou
 
 Then set the command path to these tools in =configure=.
 
-Please refer to the dependencies for file type XLSX among KinoSearchContrib#Contrib_Info.
+Please refer to the dependencies for file type XLSX under [[KinoSearchContrib#Contrib_Info][Contrib Info]].
 
 ---+++ Installing the !AddOn
 
@@ -132,7 +132,7 @@ Please refer to the dependencies for file type XLSX among KinoSearchContrib#Cont
 
 You only need the Foswiki:Extensions/KinoSearchPlugin if you are using the =rest= handlers, or the =%<nop>KINOSEARCH%= macro. Otherwise you are fine without it.
 
-There are additional packages required as listed in the dependencies under KinoSearchContrib#Contrib_Info.
+There are additional packages required as listed in the dependencies under [[KinoSearchContrib#Contrib_Info][Contrib Info]].
 
 ---++  Configuration
 
