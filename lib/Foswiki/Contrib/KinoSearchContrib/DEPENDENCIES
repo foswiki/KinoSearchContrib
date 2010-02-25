@@ -3,6 +3,7 @@ File::MMagic,>0,cpan,Required
 Module::Pluggable,>0,cpan,Required
 HTML::TreeBuilder,>0,cpan,Required
 Spreadsheet::ParseExcel,>0,cpan,Required for =.xls= files
+Text::Iconv,>0,cpan,Required for =.xlsx= files
 Spreadsheet::XLSX,>0,cpan,Required for =.xlsx= files
 CharsetDetector,>0,cpan,Required
 Encode,>0,cpan,Required
