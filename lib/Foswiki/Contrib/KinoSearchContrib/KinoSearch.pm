@@ -51,6 +51,7 @@ sub openLog {
     my $fileName = $self->logFileName($type);
 
     $LOGFILE->open(">>$fileName") || die "Logfile cannot be opend in $fileName.";
+    autoflush $LOGFILE;
 
     $LOGFILE;
 }
@@ -60,7 +61,7 @@ sub log {
  
     if ($self->{Debug} || $force || 0) {
 	my $logtime = Foswiki::Func::formatTime( time(), '$rcs', 'servertime' ); 
-	$self->{Log}->print( "| $logtime | $logString\n");
+	$self->{Log}->print( "| $logtime | $logString |\n");
 
 	#print STDERR "$logString\n";
     }
