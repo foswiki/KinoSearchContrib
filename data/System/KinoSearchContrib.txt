@@ -144,7 +144,7 @@ There are a number of settings that need to be set in =configure= before you can
       * Check that =antiword=, =abiword= or =wvHtml= is in place: Type =antiword=,  =abiword= or =wvHtml= on the prompt and check that the command exists.
       * Check that =pdftotext= is in place: Type =pdftotext= on the prompt and check that the command exists.
       * Check that =ppthtml= is in place: Type =ppthtml= on the prompt and check that the command exists.
-      * Change the working directory to the =kinosearch/bin= Foswiki installation directory.
+      * Change the current directory to the =kinosearch/bin= Foswiki installation directory.
       * Run =./kinoindex=
       * Once finished, open a browser window and point it to the =[[System.KinoSearch]]= topic.
       * Just type a query and check the results.
