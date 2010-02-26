@@ -225,7 +225,7 @@ sub changedTopics {
         my ( $topicName, $userName, $changeTime, $revision ) =
           split( /\t/, $change );
           
-        next if ( (!$changes) || ( $skipTopics{"$web.$topicName"} ) || ( $skipTopics{$topicName} ) );
+        next if ( ( !defined $topicName ) || (!$changes) || ( $skipTopics{"$web.$topicName"} ) || ( $skipTopics{$topicName} ) );
 
         if ( ( !%exclude ) || ( !$exclude{$topicName} ) ) {
 
