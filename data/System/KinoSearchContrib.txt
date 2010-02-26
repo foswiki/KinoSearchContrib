@@ -59,17 +59,17 @@ Each topic's text body, title, form fields and attached documents are indexed.
 
 You should run this script manually after installation to create the index files used by <nop>KinoSearch. 
 You can also schedule a weekly or monthly crontab job to create the index files again, or execute it manually when you take down your server for maintenance tasks. To prevent browser access, it has been placed out of the public bin folder.
-   * =cd foswiki/kinosearch/bin ; ./kinoindex=
+   * =cd foswiki/tools/ ; ./kinoindex=
 
 ---+++ Updating the Index
 
 The =kinoupdate= script uses the web's =.changes= files to know about topic modifications. Also, a =.kinoupdate= file is used on each web directory storing the last timestamp the script was run on it. So when this script is executed, it first checks if there are any topic updates since last execution. The most recent topic updates are removed from the index and then reindexed again.
-   * =cd foswiki/kinosearch/bin ; ./kinoupdate=
+   * =cd foswiki/tools/ ; ./kinoupdate=
 
 This script should be executed by an hourly crontab. As before, this script has been placed out of the public bin folder.
 <verbatim>
 # m h  dom mon dow   command
-35  *  *   *   *     cd /path/to/your/foswiki/kinosearch/bin ; ./kinoupdate
+35  *  *   *   *     cd /path/to/your/foswiki/tools/ ; ./kinoupdate
 </verbatim>
 
 ---+++ Attachment File Types to be Indexed
@@ -144,7 +144,7 @@ There are a number of settings that need to be set in =configure= before you can
       * Check that =antiword=, =abiword= or =wvHtml= is in place: Type =antiword=,  =abiword= or =wvHtml= on the prompt and check that the command exists.
       * Check that =pdftotext= is in place: Type =pdftotext= on the prompt and check that the command exists.
       * Check that =ppthtml= is in place: Type =ppthtml= on the prompt and check that the command exists.
-      * Change the current directory to the =kinosearch/bin= Foswiki installation directory.
+      * Change the current directory to the =tools= Foswiki installation directory.
       * Run =./kinoindex=
       * Once finished, open a browser window and point it to the =[[System.KinoSearch]]= topic.
       * Just type a query and check the results.
@@ -164,7 +164,7 @@ In the result you see, which stringifier is used and the result of the stringifi
 Example:
 
 <verbatim>
-/path/to/foswiki/kinosearch/bin$ ./ks_test stringify /path/to/foswiki/KinoSearchContrib/test/unit/KinoSearchContrib/attachement_examples/Simple_example.doc
+/path/to/foswiki/tools$ ./ks_test stringify /path/to/foswiki/KinoSearchContrib/test/unit/KinoSearchContrib/attachement_examples/Simple_example.doc
 
 Used stringifier: Foswiki::Contrib::KinoSearchContrib::StringifyPlugins::DOC_antiword
 

@@ -24,9 +24,9 @@ lib/Foswiki/Contrib/KinoSearchContrib/StringifierPlugins/PPTX.pm 0444 Perl modul
 lib/Foswiki/Contrib/KinoSearchContrib/StringifierPlugins/XLSX.pm 0444 Perl module
 templates/kinosearch.tmpl 0444 Search result template
 templates/kinosearchrss.tmpl 0444 RSS template
-kinosearch/bin/kinoindex 0555 Index script
-kinosearch/bin/kinoupdate 0555 Update script
-kinosearch/bin/ks_test 0555 Tester script
+tools/kinoindex 0555 Index creation script
+tools/kinoupdate 0555 Update index script
+tools/ks_test 0555 Tester script
 kinosearch/logs/ 0755 Logs directory
 kinosearch/index/ 0755 Index directory
 lib/Foswiki/Store/SearchAlgorithms/Kino.pm 0444 Perl module #highly experimental SEARCH backend. talk to SvenDowideit@home.org.au if you're stuck.
