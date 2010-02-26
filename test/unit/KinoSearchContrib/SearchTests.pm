@@ -12,10 +12,10 @@ sub new {
     my $self = shift()->SUPER::new('Search', @_);
     
     # FIXME: is there a better way to find the attachment examples?
-    $self->{attachmentDir} = 'attachement_examples/';
+    $self->{attachmentDir} = 'attachment_examples/';
     if (! -e $self->{attachmentDir}) {
         #running from foswiki/test/unit
-        $self->{attachmentDir} = 'KinoSearchContrib/attachement_examples/';
+        $self->{attachmentDir} = 'KinoSearchContrib/attachment_examples/';
     }
     
     return $self;

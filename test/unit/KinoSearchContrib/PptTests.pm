@@ -13,10 +13,10 @@ sub set_up {
     
     $this->SUPER::set_up();
     
-    $this->{attachmentDir} = 'attachement_examples/';
+    $this->{attachmentDir} = 'attachment_examples/';
     if (! -e $this->{attachmentDir}) {
         #running from foswiki/test/unit
-        $this->{attachmentDir} = 'KinoSearchContrib/attachement_examples/';
+        $this->{attachmentDir} = 'KinoSearchContrib/attachment_examples/';
     }
 }
 
@@ -59,7 +59,7 @@ sub test_passwordedFile {
     my $text  = $stringifier->stringForFile($this->{attachmentDir}.'Passworded_example.ppt');
     
     # not too sure what to test... This is the default from pptHtml
-    $this->assert_equals('http://chicago.sf.net/xlhtml attachement_examples/Passworded_example.ppt  Created with pptHtml', $text, "Protected file generated some text?");
+    $this->assert_equals('http://chicago.sf.net/xlhtml attachment_examples/Passworded_example.ppt  Created with pptHtml', $text, "Protected file generated some text?");
 }
 
 # test what would happen if someone uploaded a png and called it a .ppt

@@ -11,10 +11,10 @@ use Foswiki::Contrib::KinoSearchContrib::Search;
 sub new {
     my $self = shift()->SUPER::new('Index', @_);
     
-    $self->{attachmentDir} = 'attachement_examples/';
+    $self->{attachmentDir} = 'attachment_examples/';
     if (! -e $self->{attachmentDir}) {
         #running from foswiki/test/unit
-        $self->{attachmentDir} = 'KinoSearchContrib/attachement_examples/';
+        $self->{attachmentDir} = 'KinoSearchContrib/attachment_examples/';
     }
     
     return $self;

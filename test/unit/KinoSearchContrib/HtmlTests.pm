@@ -11,10 +11,10 @@ use Foswiki::Contrib::KinoSearchContrib::Stringifier;
 sub set_up {
         my $this = shift;
         
-    $this->{attachmentDir} = 'attachement_examples/';
+    $this->{attachmentDir} = 'attachment_examples/';
     if (! -e $this->{attachmentDir}) {
         #running from foswiki/test/unit
-        $this->{attachmentDir} = 'KinoSearchContrib/attachement_examples/';
+        $this->{attachmentDir} = 'KinoSearchContrib/attachment_examples/';
     }
     
     $this->SUPER::set_up();

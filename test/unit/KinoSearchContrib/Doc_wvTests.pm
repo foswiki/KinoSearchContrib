@@ -10,10 +10,10 @@ use Foswiki::Contrib::KinoSearchContrib::Stringifier;
 sub set_up {
         my $this = shift;
 
-    $this->{attachmentDir} = 'attachement_examples/';
+    $this->{attachmentDir} = 'attachment_examples/';
     if (! -e $this->{attachmentDir}) {
         #running from foswiki/test/unit
-        $this->{attachmentDir} = 'KinoSearchContrib/attachement_examples/';
+        $this->{attachmentDir} = 'KinoSearchContrib/attachment_examples/';
     }
 
     $this->SUPER::set_up();
@@ -28,7 +28,7 @@ sub set_up {
 #Keyword: redmond
 #HERE
 #    $this->{session}->{store}->saveAttachment($this->{users_web}, "TopicWithWordAttachment", "Simple_example.doc",
-#                                            $this->{session}->{user}, {file => "attachement_examples/Simple_example.doc"})
+#                                            $this->{session}->{user}, {file => "attachment_examples/Simple_example.doc"})
 }
 
 sub tear_down {

@@ -164,7 +164,7 @@ In the result you see, which stringifier is used and the result of the stringifi
 Example:
 
 <verbatim>
-/path/to/foswiki/tools$ ./ks_test stringify /path/to/foswiki/KinoSearchContrib/test/unit/KinoSearchContrib/attachement_examples/Simple_example.doc
+/path/to/foswiki/tools$ ./ks_test stringify /path/to/foswiki/KinoSearchContrib/test/unit/KinoSearchContrib/attachment_examples/Simple_example.doc
 
 Used stringifier: Foswiki::Contrib::KinoSearchContrib::StringifyPlugins::DOC_antiword
 
