@@ -165,7 +165,7 @@ HERE
     $topic = $hit->{topic};
     $this->assert_str_equals($topic, "NewOrChangedTopicUpdate2", "Wrong topic for attach.");
 
-    # Now let't change the attachment
+    # Now let's change the attachment
     Foswiki::Func::saveAttachment( $this->{test_web}, "NewOrChangedTopicUpdate2", "Simple_example.doc",
 				   {file => $this->{attachmentDir}."Simple_example2.doc"});
     $ind->updateIndex();
