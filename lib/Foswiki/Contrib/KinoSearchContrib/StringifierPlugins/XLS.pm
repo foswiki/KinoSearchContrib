@@ -13,7 +13,8 @@
 # http://www.gnu.org/copyleft/gpl.html
 
 package Foswiki::Contrib::KinoSearchContrib::StringifyPlugins::XLS;
-use base 'Foswiki::Contrib::KinoSearchContrib::StringifyBase';
+use Foswiki::Contrib::KinoSearchContrib::StringifyBase;
+our @ISA = qw( Foswiki::Contrib::KinoSearchContrib::StringifyBase );
 __PACKAGE__->register_handler("application/excel", ".xls");
 
 use Spreadsheet::ParseExcel;

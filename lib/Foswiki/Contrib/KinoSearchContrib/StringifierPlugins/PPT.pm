@@ -14,7 +14,8 @@
 
 
 package Foswiki::Contrib::KinoSearchContrib::StringifyPlugins::PPT;
-use base 'Foswiki::Contrib::KinoSearchContrib::StringifyBase';
+use Foswiki::Contrib::KinoSearchContrib::StringifyBase;
+our @ISA = qw( Foswiki::Contrib::KinoSearchContrib::StringifyBase );
 use Foswiki::Contrib::KinoSearchContrib::Stringifier;
 use File::Temp qw/tmpnam/;
 

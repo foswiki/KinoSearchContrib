@@ -14,7 +14,8 @@
 # For licensing info read LICENSE file in the Foswiki root.
 
 package Foswiki::Contrib::KinoSearchContrib::StringifyPlugins::PPTX;
-use base 'Foswiki::Contrib::KinoSearchContrib::StringifyBase';
+use Foswiki::Contrib::KinoSearchContrib::StringifyBase;
+our @ISA = qw( Foswiki::Contrib::KinoSearchContrib::StringifyBase );
 use Foswiki::Contrib::KinoSearchContrib::Stringifier;
 use File::Temp qw/tmpnam/;
 use Encode;

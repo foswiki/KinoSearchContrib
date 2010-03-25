@@ -14,7 +14,8 @@
 
 
 package Foswiki::Contrib::KinoSearchContrib::StringifyPlugins::HTML;
-use base 'Foswiki::Contrib::KinoSearchContrib::StringifyBase';
+use Foswiki::Contrib::KinoSearchContrib::StringifyBase;
+our @ISA = qw( Foswiki::Contrib::KinoSearchContrib::StringifyBase );
 use HTML::TreeBuilder;
 use Encode;
 use CharsetDetector;

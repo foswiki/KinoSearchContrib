@@ -13,7 +13,8 @@
 # http://www.gnu.org/copyleft/gpl.html
 
 package Foswiki::Contrib::KinoSearchContrib::StringifyPlugins::DOC_wv;
-use base 'Foswiki::Contrib::KinoSearchContrib::StringifyBase';
+use Foswiki::Contrib::KinoSearchContrib::StringifyBase;
+our @ISA = qw( Foswiki::Contrib::KinoSearchContrib::StringifyBase );
 use File::Temp qw/tmpnam/;
 
 my $wvHtml = $Foswiki::cfg{KinoSearchContrib}{wvHtmlCmd} || 'wvHtml';
