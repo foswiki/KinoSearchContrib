@@ -1,6 +1,7 @@
 # Test for Text.pm
 package TxtTests;
-use base qw( FoswikiFnTestCase );
+use FoswikiFnTestCase;
+our @ISA = qw( FoswikiFnTestCase );
 
 use strict;
 

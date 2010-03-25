@@ -1,6 +1,7 @@
 # Test for PPTX.pm
 package PptxTests;
-use base qw( FoswikiFnTestCase );
+use FoswikiFnTestCase;
+our @ISA = qw( FoswikiFnTestCase );
 
 use strict;
 

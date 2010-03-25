@@ -1,6 +1,7 @@
 # Test for DOC_wv.pm
 package Doc_wvTests;
-use base qw( FoswikiFnTestCase );
+use FoswikiFnTestCase;
+our @ISA = qw( FoswikiFnTestCase );
 
 use strict;
 

@@ -1,6 +1,7 @@
 # Test for StringifyBase.pm
 package StringifyBaseTest;
-use base qw( FoswikiFnTestCase );
+use FoswikiFnTestCase;
+our @ISA = qw( FoswikiFnTestCase );
 
 use strict;
 use File::Temp qw/tmpnam/;

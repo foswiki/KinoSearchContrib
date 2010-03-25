@@ -1,6 +1,7 @@
 # Test for DOC_antiword.pm
 package Doc_antiwordTests;
-use base qw( FoswikiFnTestCase );
+use FoswikiFnTestCase;
+our @ISA = qw( FoswikiFnTestCase );
 
 use strict;
 

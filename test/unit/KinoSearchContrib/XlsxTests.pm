@@ -1,6 +1,7 @@
 # Test for XLSX.pm
 package XlsxTests;
-use base qw( FoswikiFnTestCase );
+use FoswikiFnTestCase;
+our @ISA = qw( FoswikiFnTestCase );
 
 use strict;
 

@@ -1,6 +1,7 @@
 # Test for DOC_abiword.pm
 package Doc_abiwordTests;
-use base qw( FoswikiFnTestCase );
+use FoswikiFnTestCase;
+our @ISA = qw( FoswikiFnTestCase );
 
 use strict;
 
