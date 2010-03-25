@@ -17,7 +17,8 @@
 # Set library paths in @INC, at compile time
 
 package Foswiki::Contrib::KinoSearchContrib::Search;
-use base Foswiki::Contrib::KinoSearchContrib::KinoSearch;
+use Foswiki::Contrib::KinoSearchContrib::KinoSearch;
+our @ISA = qw( Foswiki::Contrib::KinoSearchContrib::KinoSearch );
 
 use KinoSearch::Searcher;
 use KinoSearch::Analysis::PolyAnalyzer;

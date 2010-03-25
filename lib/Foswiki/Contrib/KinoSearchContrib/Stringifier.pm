@@ -15,7 +15,8 @@
 
 package Foswiki::Contrib::KinoSearchContrib::Stringifier;
 use strict;
-use base "Foswiki::Contrib::KinoSearchContrib::StringifyBase";
+use Foswiki::Contrib::KinoSearchContrib::StringifyBase;
+our @ISA = qw( Foswiki::Contrib::KinoSearchContrib::StringifyBase );
 use Carp;
 use File::MMagic;
 use File::Spec::Functions qw(rel2abs);
