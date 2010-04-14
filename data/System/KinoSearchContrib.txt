@@ -217,6 +217,7 @@ All the stringifiers have unit tests associated with them, and we would encourag
 |  Release: | %$RELEASE% |
 |  Version: | %$VERSION% |
 |  Change History: | <!-- versions below in reverse order -->&nbsp; |
+|  14 Apr 2010:  | v 1.24, Foswikitask:Item8426: fix typo in Index.pm |
 |  11 Mar 2010:  | v 1.23, Foswikitask:Item8581: fix executable permission bits, fix typos, add dependency CPAN:Text::Iconv, flushes log files, move =kinosearch/bin= files to standard =tools= location -- Foswiki:Main.WillNorris |
 |  04 Nov 2009:  | v 1.22, Foswikitask:Item2326: small documentation improvent -- Foswiki:Main.IngoKappler |
 |  24 Sep 2009:  | v 1.21, Foswikitask:Item1363: port to Foswiki -- Foswiki:Main.WillNorris. Rename to !KinoSearchContrib and split plugin into !KinoSearchPlugin; add stringifiers for =.docx=, =.pptx= and =.xlsx=; change the =kinosearch= script to work with [[Foswiki:Development.FoswikiStandAlone][FSA]]; Moved settings into =configure=; Commands now set in =configure=; Replaced =system()= calls with =Foswiki::Sandbox->sysCommand()=; Handle passworded MS Office files; Make the index more robust if it somehow encounters binary files; Can now specify skipped topics; updated and simplified docs; added doc for TipsContrib; update templates; Foswikitask:Item8246: fix checking of access controls -- Foswiki:Main.AndrewJones |

@@ -20,6 +20,6 @@ use strict;
 use vars qw( $VERSION $RELEASE $SHORTDESCRIPTION );
 
 our $VERSION = '$Rev: 4913 $';
-our $RELEASE = '1.23';
+our $RELEASE = '1.24';
 our $SHORTDESCRIPTION = 'Fast indexed search including attachments like Word, Excel, and PDF';
 
