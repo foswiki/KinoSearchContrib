@@ -1,4 +1,4 @@
-Foswiki::Contrib::StringifierContrib,perl,Required for indexing attachments
+Foswiki::Contrib::StringifierContrib,>0,perl,Required for indexing attachments
 KinoSearch,>0,cpan,Required
 Error,>0,cpan,Required
 Time::Local,>0,cpan,Required
