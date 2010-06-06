@@ -9,19 +9,6 @@ lib/Foswiki/Contrib/KinoSearchContrib.pm 0444 Perl module
 lib/Foswiki/Contrib/KinoSearchContrib/Index.pm 0444 Perl module
 lib/Foswiki/Contrib/KinoSearchContrib/KinoSearch.pm 0444 Perl module
 lib/Foswiki/Contrib/KinoSearchContrib/Search.pm 0444 Perl module
-lib/Foswiki/Contrib/KinoSearchContrib/Stringifier.pm 0444 Perl module
-lib/Foswiki/Contrib/KinoSearchContrib/StringifyBase.pm 0444 Perl module
-lib/Foswiki/Contrib/KinoSearchContrib/StringifierPlugins/DOC_antiword.pm 0444 Perl module
-lib/Foswiki/Contrib/KinoSearchContrib/StringifierPlugins/DOC_abiword.pm 0444 Perl module
-lib/Foswiki/Contrib/KinoSearchContrib/StringifierPlugins/DOC_wv.pm 0444 Perl module
-lib/Foswiki/Contrib/KinoSearchContrib/StringifierPlugins/HTML.pm 0444 Perl module
-lib/Foswiki/Contrib/KinoSearchContrib/StringifierPlugins/PDF.pm 0444 Perl module
-lib/Foswiki/Contrib/KinoSearchContrib/StringifierPlugins/Text.pm 0444 Perl module
-lib/Foswiki/Contrib/KinoSearchContrib/StringifierPlugins/XLS.pm 0444 Perl module
-lib/Foswiki/Contrib/KinoSearchContrib/StringifierPlugins/PPT.pm 0444 Perl module
-lib/Foswiki/Contrib/KinoSearchContrib/StringifierPlugins/DOCX.pm 0444 Perl module
-lib/Foswiki/Contrib/KinoSearchContrib/StringifierPlugins/PPTX.pm 0444 Perl module
-lib/Foswiki/Contrib/KinoSearchContrib/StringifierPlugins/XLSX.pm 0444 Perl module
 templates/kinosearch.tmpl 0444 Search result template
 templates/kinosearchrss.tmpl 0444 RSS template
 tools/kinoindex 0555 Index creation script

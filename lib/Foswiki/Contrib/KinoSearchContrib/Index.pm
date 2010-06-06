@@ -23,7 +23,7 @@ our @ISA = qw( Foswiki::Contrib::KinoSearchContrib::KinoSearch );
 use KinoSearch::InvIndexer;
 use KinoSearch::Analysis::PolyAnalyzer;
 
-use Foswiki::Contrib::KinoSearchContrib::Stringifier;
+use Foswiki::Contrib::StringifierContrib;
 use strict;
 
 use Foswiki::Form;
@@ -566,7 +566,7 @@ sub indexAttachment {
     $filename =~ /(.*)/;
     $filename = $1;
     my $attText =
-      Foswiki::Contrib::KinoSearchContrib::Stringifier->stringFor(
+      Foswiki::Contrib::StringifierContrib->stringFor(
         $filename);
         
     return if (!defined($attText)); #attachment may not be there.

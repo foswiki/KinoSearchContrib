@@ -74,7 +74,7 @@ This script should be executed by an hourly crontab. As before, this script has 
 
 ---+++ Attachment File Types to be Indexed
 
-By default, the following file types are indexed:
+This extension uses the Foswiki:Extensions.StringifierContrib to index attachments. By default, the following file types are indexed:
    * =.txt=
    * =.html=
    * =.xml=
@@ -98,36 +98,6 @@ __Note__: With =kinoupdate= only the form fields that existed at the time the in
 
 ---++ Installation Instructions
 
----+++ Backend for Indexing Word 2003 Documents
-
-To index Word 2003 Documents (=.doc=) you will need to install one of the following:
-
-   * =antiword= (recommended)
-   * =abiword=
-   * =wvWare=
-
-You can then select the tool to use in =configure=.
-
----+++ Backend for PDF
-
-To index =.pdf= files you need to install =xpdf-utils=.
-
----+++ Backend for PPT
-
-To index =.ppt= files you need to install =ppthtml=.
-
----+++ Backends for DOCX, PPTX
-
-To index these file types, you will need to install the following tools from Sourceforge:
-   * [[http://sourceforge.net/projects/docx2txt/][docx2txt]] for =.docx=
-   * [[http://sourceforge.net/projects/pptx2txt/][pptx2txt]] for =.pptx=
-
-Then set the command path to these tools in =configure=.
-
-Please refer to the dependencies for file type XLSX under [[KinoSearchContrib#Contrib_Info][Contrib Info]].
-
----+++ Installing the !AddOn
-
 %$INSTALL_INSTRUCTIONS%
 
 You only need the Foswiki:Extensions/KinoSearchPlugin if you are using the =rest= handlers, or the =%<nop>KINOSEARCH%= macro. Otherwise you are fine without it.
@@ -141,9 +111,6 @@ There are a number of settings that need to be set in =configure= before you can
 ---+++ Test of the Installation
 
    * Test if the installation was successful:
-      * Check that =antiword=, =abiword= or =wvHtml= is in place: Type =antiword=,  =abiword= or =wvHtml= on the prompt and check that the command exists.
-      * Check that =pdftotext= is in place: Type =pdftotext= on the prompt and check that the command exists.
-      * Check that =ppthtml= is in place: Type =ppthtml= on the prompt and check that the command exists.
       * Change the current directory to the =tools= Foswiki installation directory.
       * Run =./kinoindex=
       * Once finished, open a browser window and point it to the =[[System.KinoSearch]]= topic.
@@ -166,7 +133,7 @@ Example:
 <verbatim>
 /path/to/foswiki/tools$ ./ks_test stringify /path/to/foswiki/KinoSearchContrib/test/unit/KinoSearchContrib/attachment_examples/Simple_example.doc
 
-Used stringifier: Foswiki::Contrib::KinoSearchContrib::StringifyPlugins::DOC_antiword
+Used stringifier: Foswiki::Contrib::StringifierContrib::StringifyPlugins::DOC_antiword
 
 Stringified text:
 
@@ -191,21 +158,6 @@ Finally, the following settings have been renamed:
 
 There is certainly a lot more that can be done with this Add-on, such as adding more stringifiers, improving the performance and making it more robust. See Foswiki:Tasks/KinoSearchContrib for currently open tasks.
 
----+++ Indexing Further Document Types
-
-The indexing of attached documents is realised in two steps: 
-   1 the content of the document is changed to an ASCII string. This is called stringification. 
-   1 this ASCII string is indexed with <nop>KinoSearch. This is the normal way in all index applications.  
-
-To index different types of documents, it is necessary to have specialised stringifiers, i.e. classes to extract the ASCII text out of the document.  In this contrib, a plug-in mechanism is implemented, so that additional stringifiers can be added without changing the existing code. All stringifier plugins are stored in the directory =lib/Foswiki/Contrib/KinoSearchContrib/StringifierPlugins=. 
-
-You can add new stringifier plugins by just adding new files here. The minimum things to be implemented are:
-   * The plugin must inherit from =Foswiki::Contrib::KinoSearchContrib::StringifyBase=
-   * The plugin must register itself by =__PACKAGE__->register_handler($application, $file_extension)=;
-   * The plugin must implement the method =$text = stringForFile ($filename)=
-
-All the stringifiers have unit tests associated with them, and we would encourage you to provide unit tests for any you wish to contribute. See Foswiki:Development/UnitTests for more information on unit testing.
-
 ---++ Contrib Info
 
 <!--
@@ -217,6 +169,7 @@ All the stringifiers have unit tests associated with them, and we would encourag
 |  Release: | %$RELEASE% |
 |  Version: | %$VERSION% |
 |  Change History: | <!-- versions below in reverse order -->&nbsp; |
+|  06 Jun 2010:  | v 1.25, Foswikitask:Item8629: refactored to use Foswiki::Extensions.StringifierContrib -- Foswiki:Main.AndrewJones |
 |  14 Apr 2010:  | v 1.24, Foswikitask:Item8426: fix typo in Index.pm |
 |  11 Mar 2010:  | v 1.23, Foswikitask:Item8581: fix executable permission bits, fix typos, add dependency CPAN:Text::Iconv, flushes log files, move =kinosearch/bin= files to standard =tools= location -- Foswiki:Main.WillNorris |
 |  04 Nov 2009:  | v 1.22, Foswikitask:Item2326: small documentation improvent -- Foswiki:Main.IngoKappler |
