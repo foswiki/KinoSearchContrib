@@ -116,33 +116,6 @@ There are a number of settings that need to be set in =configure= before you can
       * Once finished, open a browser window and point it to the =[[System.KinoSearch]]= topic.
       * Just type a query and check the results.
 
----+++ Test of Stringification with =ks_test=
-
-Some users report problems with the stringification: The =kinoindex= scipts fails, takes too long on attachments or =kinosearch= does not yield correct results. Some times this may result from installation errors esp. of the installation of the backends for the stringification.
-
-=ks_test= give you the opportunity to test the stringification in advance.
-
-Usage: =ks_test stringify file_name=
-
-(I plan to extend ks_test, but at the moment the only possible second parameter is stringify).
-
-In the result you see, which stringifier is used and the result of the stringification.
-
-Example:
-
-<verbatim>
-/path/to/foswiki/tools$ ./ks_test stringify /path/to/foswiki/KinoSearchContrib/test/unit/KinoSearchContrib/attachment_examples/Simple_example.doc
-
-Used stringifier: Foswiki::Contrib::StringifierContrib::StringifyPlugins::DOC_antiword
-
-Stringified text:
-
-  Simple example  Keyword: dummy  Umlaute: Grober, Uberschall, Anderung
-</verbatim>
-
-You see that the stringifier DOC_antiword is used and the resulting
-text seems to be O.K.
-
 ---+++ Upgrading From !SearchEngineKinoSearchAddOn
 
 If you previously used the !SearchEngineKinoSearchAddOn (either on TWiki or on Foswiki), you will have noticed that this has been repackaged as a Contrib in line with Foswiki standards. The plugin is available seperately at Foswiki:Extensions/KinoSearchPlugin
@@ -153,10 +126,6 @@ Finally, the following settings have been renamed:
 
    * =$Foswiki::cfg{KinoSearchLogDir}= __-->__ =$Foswiki::cfg{KinoSearchContrib}{LogDirectory}=
    * =$Foswiki::cfg{KinoSearchIndexDir}= __-->__ =$Foswiki::cfg{KinoSearchContrib}{IndexDirectory}=
-
----++ Further Development
-
-There is certainly a lot more that can be done with this Add-on, such as adding more stringifiers, improving the performance and making it more robust. See Foswiki:Tasks/KinoSearchContrib for currently open tasks.
 
 ---++ Contrib Info
 
@@ -169,6 +138,7 @@ There is certainly a lot more that can be done with this Add-on, such as adding 
 |  Release: | %$RELEASE% |
 |  Version: | %$VERSION% |
 |  Change History: | <!-- versions below in reverse order -->&nbsp; |
+|  14 Jul 2010:  | v 1.26, removed the =ks_test_ script. Use the =stringify= script from Foswiki:Extensions.StringifierContrib instead |
 |  06 Jun 2010:  | v 1.25, Foswikitask:Item8629: refactored to use Foswiki::Extensions.StringifierContrib -- Foswiki:Main.AndrewJones |
 |  14 Apr 2010:  | v 1.24, Foswikitask:Item8426: fix typo in Index.pm |
 |  11 Mar 2010:  | v 1.23, Foswikitask:Item8581: fix executable permission bits, fix typos, add dependency CPAN:Text::Iconv, flushes log files, move =kinosearch/bin= files to standard =tools= location -- Foswiki:Main.WillNorris |
