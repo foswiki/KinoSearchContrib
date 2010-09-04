@@ -277,7 +277,10 @@ sub searchStringForWebs {
 
     # A value of 'all' or 'on' by itself gets all webs,
     # otherwise ignored (unless there is a web called "All".)
-    my $searchAllFlag = ( $websStr =~ /(^|[\,\s])(all|on)([\,\s]|$)/i );
+    my $searchAllFlag = 0;
+    if (defined $websStr) {
+	$searchAllFlag = ( $websStr =~ /(^|[\,\s])(all|on)([\,\s]|$)/i );
+    }
 			  
     # ok, if we have web parameters, just make them part of the Kino query
     # i.e. 'search=x&web=System&web=Main', then query becomes 'x and (web:System web:Main)'
@@ -386,7 +389,8 @@ sub renderHtmlStringFor {
     # field $name only is present if the hit is an attachment
     if ($name) {
 	# icon for attachment based on filename
-	$icon = $Foswiki::Plugins::SESSION->mapToIconFileName($name);
+	$icon = $name;
+	$icon =~ s/["}%]//g; # ensure that the filename won't break the %ICON attribute parsing
 	$icon = "%ICON{\"$icon\"}%";
 	# URL for the file
 	$tempVal =~ s/%MATCH%/<a href="%PUBURLPATH%\/$resweb\/$restopic\/$name">$name<\/a>/go;
