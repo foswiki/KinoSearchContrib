@@ -138,6 +138,7 @@ Finally, the following settings have been renamed:
 |  Release: | %$RELEASE% |
 |  Version: | %$VERSION% |
 |  Change History: | <!-- versions below in reverse order -->&nbsp; |
+|  04 Sep 2010:  | v 1.27, Use the ICON macro as it is documented, instead of calling a function that was removed in 1.1.  Also =$websStr= can be undef in =searchStringForWebs()=, so it is best to check that it is defined before testing it with a regex.  -- Foswiki:Main.MichaelTempest |
 |  14 Jul 2010:  | v 1.26, removed the =ks_test_ script. Use the =stringify= script from Foswiki:Extensions.StringifierContrib instead |
 |  06 Jun 2010:  | v 1.25, Foswikitask:Item8629: refactored to use Foswiki::Extensions.StringifierContrib -- Foswiki:Main.AndrewJones |
 |  14 Apr 2010:  | v 1.24, Foswikitask:Item8426: fix typo in Index.pm |
