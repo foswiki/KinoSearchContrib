@@ -382,9 +382,10 @@ sub renderHtmlStringFor {
 	$revNum = $hit->{version};
 	$revDate = $hit->{date};
     }
+    my $score = sprintf("%.2f", $hit->{score} * 100);
 
     $tempVal =~ s/%WEB%/$resweb/go;
-    $tempVal =~ s/%SCORE%//go;
+    $tempVal =~ s/%SCORE%/$score/go;
     
     # field $name only is present if the hit is an attachment
     if ($name) {
@@ -400,7 +401,7 @@ sub renderHtmlStringFor {
 	# no icon for topics
 	$icon = "";
 	# URL for the topic
-	$tempVal =~ s/%MATCH%/\[\[$resweb\.$restopic\]\]/go;
+	$tempVal =~ s/%MATCH%/\[\[$resweb\.$restopic\]\[$restopic\]\]/go;
 	# if locks are to be displayed, then find it out for each hit
 	if ($showlock) {
 	    ($url, $lockinguser, $locked) = Foswiki::Func::checkTopicEditLock($resweb, $restopic);
