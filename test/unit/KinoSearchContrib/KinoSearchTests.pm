@@ -7,6 +7,16 @@ use strict;
 
 use Foswiki::Contrib::KinoSearchContrib::KinoSearch;
 
+sub set_up {
+    my $this = shift;
+
+    $this->SUPER::set_up();
+    
+    # ensure we use the tests working dir
+    $Foswiki::cfg{KinoSearchContrib}{LogDirectory} = undef;
+    $Foswiki::cfg{KinoSearchContrib}{IndexDirectory} = undef;
+}
+
 sub test_new {
     my $this = shift;
 
@@ -28,10 +38,11 @@ sub test_logDirName {
 
     my $ks = new Foswiki::Contrib::KinoSearchContrib::KinoSearch("index");
 
-    $Foswiki::cfg{KinoSearchContrib}{LogDirectory}="";
+    $Foswiki::cfg{KinoSearchContrib}{LogDirectory} = "";
 
-    my $dir = Foswiki::Func::getPubDir();
-    $dir .="/../kinosearch/logs";
+    my $dir = Foswiki::Func::getWorkArea('KinoSearchContrib');
+    $dir .= "/logs";
+    
     $this->assert_str_equals( $dir, $ks->logDirName(), "Bad default log dir");
 
     $Foswiki::cfg{KinoSearchContrib}{LogDirectory}="dummy";
@@ -43,9 +54,9 @@ sub test_indexPath {
 
     my $ks = new Foswiki::Contrib::KinoSearchContrib::KinoSearch("index");
 
-    $Foswiki::cfg{KinoSearchContrib}{IndexDirectory}="";
-    my $dir = Foswiki::Func::getPubDir();
-    $dir .="/../kinosearch/index";
+    $Foswiki::cfg{KinoSearchContrib}{IndexDirectory} = "";
+    my $dir = Foswiki::Func::getWorkArea('KinoSearchContrib');
+    $dir .= "/index";
     $this->assert_str_equals( $dir, $ks->indexPath(), "Bad default index dir");
 
     $Foswiki::cfg{KinoSearchContrib}{IndexDirectory}="dummy";

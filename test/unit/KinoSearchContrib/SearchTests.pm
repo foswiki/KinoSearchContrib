@@ -12,11 +12,10 @@ use Foswiki::Contrib::KinoSearchContrib::Index;
 sub new {
     my $self = shift()->SUPER::new('Search', @_);
     
-    # FIXME: is there a better way to find the attachment examples?
-    $self->{attachmentDir} = 'attachment_examples/';
+    # try and guess where our test attachments are
+    $self->{attachmentDir} = "$Foswiki::cfg{WorkingDir}/../../KinoSearchContrib/test/unit/KinoSearchContrib/attachment_examples/";
     if (! -e $self->{attachmentDir}) {
-        #running from foswiki/test/unit
-        $self->{attachmentDir} = 'KinoSearchContrib/attachment_examples/';
+        die "Can't find attachment_examples directory (tried $self->{attachmentDir})";
     }
     
     return $self;
@@ -30,6 +29,10 @@ sub set_up {
     $Foswiki::cfg{StoreImpl} = 'RcsLite';
     
     $Foswiki::cfg{KinoSearchContrib}{Debug} = 1;
+    
+    # ensure we use the tests working dir
+    $Foswiki::cfg{KinoSearchContrib}{LogDirectory} = undef;
+    $Foswiki::cfg{KinoSearchContrib}{IndexDirectory} = undef;
     
     # don't bother indexing everything, we only want the temporary webs. Makes the tests a lot quicker
     $Foswiki::cfg{KinoSearchContrib}{SkipWebs} = 'Trash, Sandbox, System, TWiki, Main, TestCases';

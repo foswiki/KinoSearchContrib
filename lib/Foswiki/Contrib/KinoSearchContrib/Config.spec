@@ -87,11 +87,11 @@ $Foswiki::cfg{KinoSearchContrib}{showAttachments} = 0;
 
 # **PATH**
 # Where KinoSearh logs are stored
-$Foswiki::cfg{KinoSearchContrib}{LogDirectory} = '$Foswiki::cfg{PubDir}/../kinosearch/logs';
+$Foswiki::cfg{KinoSearchContrib}{LogDirectory} = '$Foswiki::cfg{WorkingDir}/work_areas/KinoSearchContrib/logs';
 
 # **PATH**
 # Where KinoSearh index is stored
-$Foswiki::cfg{KinoSearchContrib}{IndexDirectory} = '$Foswiki::cfg{PubDir}/../kinosearch/index';
+$Foswiki::cfg{KinoSearchContrib}{IndexDirectory} = '$Foswiki::cfg{WorkingDir}/work_areas/KinoSearchContrib/index';
 
 # **BOOLEAN**
 # Debug setting

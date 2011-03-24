@@ -50,7 +50,7 @@ sub openLog {
     my $LOGFILE = new IO::File;
     my $fileName = $self->logFileName($type);
 
-    $LOGFILE->open(">>$fileName") || die "Logfile cannot be opend in $fileName.";
+    $LOGFILE->open(">>$fileName") || die "Logfile cannot be opened at $fileName.";
     autoflush $LOGFILE;
 
     $LOGFILE;
@@ -75,11 +75,16 @@ sub log {
 sub logDirName {
     my $log = $Foswiki::cfg{KinoSearchContrib}{LogDirectory};
 
+    # by calling, we know it will be created
+    my $work_area = Foswiki::Func::getWorkArea('KinoSearchContrib');
     if (!$log) {
-	$log = Foswiki::Func::getPubDir();
-	$log .="/../kinosearch/logs";
+        $log = "$work_area/logs";
     }
-
+    
+    unless( -d $log ){
+        mkdir($log , 0777);
+    }
+    
     return $log;
 }
 
@@ -97,9 +102,14 @@ sub logFileName {
 sub indexPath {
     my $idx = $Foswiki::cfg{KinoSearchContrib}{IndexDirectory};
 
+    # by calling, we know it will be created
+    my $work_area = Foswiki::Func::getWorkArea('KinoSearchContrib');
     if (!$idx) {
-	$idx = Foswiki::Func::getPubDir();
-	$idx .="/../kinosearch/index";
+        $idx ="$work_area/index";
+    }
+    
+    unless( -d $idx ){
+        mkdir($idx , 0777);
     }
 
     return $idx;
