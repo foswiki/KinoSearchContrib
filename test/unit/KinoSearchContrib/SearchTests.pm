@@ -289,6 +289,24 @@ sub test_search_form_field {
     $this->assert_matches("TopicWithForm", $result, "TopicWithForm not found");
 }
 
+# full text search should return values from a form field
+# currently fails - see Item5581. Classed as an enhancement.
+sub test_search_text_form_field {
+    my $this = shift;
+    my $result;
+
+    my $ind = Foswiki::Contrib::KinoSearchContrib::Index->newCreateIndex();
+    $ind->createIndex();
+
+    $result = $this->_search($this->{test_web},
+			     "Kino",
+			     $this->{test_user_wikiname},
+			     "unit test suite");
+
+    $this->expect_failure();
+    $this->assert_matches("TopicWithForm", $result, "TopicWithForm not found");
+}
+
 # I check, if the access rights of the users are checked.
 sub test_search_with_users {
     my $this = shift;
