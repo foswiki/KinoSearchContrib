@@ -176,6 +176,8 @@ sub indexer {
     $invindexer->spec_field( name => 'type' );
 
     # Name of the form, if a topic has one.
+    # for legacy reasons, we support form: and form_name:
+    $invindexer->spec_field( name => 'form' );
     $invindexer->spec_field( name => 'form_name' );
 
     # Now the fields from the forms:
@@ -491,7 +493,9 @@ sub indexTopic {
     if ($meta) {
         my $form = $meta->get('FORM');
         if ($form) {
+            # for legacy reasons, we support form: and form_name:
             $doc->set_value( form_name => $form->{name} );
+            $doc->set_value( form => $form->{name} );
         }
         my @fields = $meta->find('FIELD');
         if (@fields) {

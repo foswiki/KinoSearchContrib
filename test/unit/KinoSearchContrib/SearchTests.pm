@@ -49,6 +49,27 @@ Keyword: redmond
 HERE
 	Foswiki::Func::saveAttachment( $this->{test_web}, "TopicWithWordAttachment", "Simple_example.doc",
 				       {file => $this->{attachmentDir}."Simple_example.doc"});
+	
+	Foswiki::Func::saveTopicText( $this->{test_web}, 'WebPreferences', <<'HERE');	
+   * Set WEBFORMS = BasicForm
+HERE
+
+    Foswiki::Func::saveTopicText( $this->{test_web}, 'BasicForm', <<'HERE');	
+| *Name:* | *Type:* | *Size:* | *Values:* | *Tooltip message:* |
+| TopicClassification | select | 1 | | Classify a topic |
+| TopicSummary | text |  80 | | Classify a topic |
+| InterestedParties | text |  80 | |  Use for tracking and show key interested people |	
+HERE
+	
+	Foswiki::Func::saveTopicText( $this->{test_web}, 'TopicWithForm', <<'HERE');
+example topic woith a form
+keyword: structure
+
+%META:FORM{name="BasicForm"}%
+%META:FIELD{name="TopicClassification" attributes="" title="TopicClassification" value="DeveloperDocumentation"}%
+%META:FIELD{name="TopicSummary" attributes="" title="TopicSummary" value="How to run the unit test suite"}%
+%META:FIELD{name="InterestedParties" attributes="" title="InterestedParties" value=""}%
+HERE
 }
 
 sub tear_down {
@@ -164,8 +185,8 @@ Just an example topic
 Keyword: BodyToSearchFor
 HERE
 
-	Foswiki::Func::saveAttachment( $this->{test_web}, "TopicToSearch", "Simple_example.html",
-				       {file => $this->{attachmentDir}."Simple_example.html"});
+	Foswiki::Func::saveAttachment( $this->{test_web}, "TopicToSearch", "Simple_example.txt",
+				       {file => $this->{attachmentDir}."Simple_example.txt"});
 
     my $ind = Foswiki::Contrib::KinoSearchContrib::Index->newCreateIndex();
     $ind->createIndex();
@@ -173,16 +194,69 @@ HERE
     my $result = $this->_search($this->{test_web},
 			     "Kino",
 			     $this->{test_user_wikiname},
-			     "type:html");
+			     "type:txt");
 
-    $this->assert_matches("TopicToSearch", $result, "TopicToSearch not found for type:html");
+    $this->assert_matches("TopicToSearch", $result, "TopicToSearch not found for type:txt");
 
     $result = $this->_search($this->{test_web},
 			     "Kino",
 			     $this->{test_user_wikiname},
-			     "name:Simple_example.html");
+			     "name:Simple_example.txt");
 
-    $this->assert_matches("TopicToSearch", $result, "TopicToSearch not found for name:Simple_example.html");
+    $this->assert_matches("TopicToSearch", $result, "TopicToSearch not found for name:Simple_example.txt");
+}
+
+# form:BasicForm
+sub test_search_form {
+    my $this = shift;
+    my $result;
+
+    my $ind = Foswiki::Contrib::KinoSearchContrib::Index->newCreateIndex();
+    $ind->createIndex();
+
+    $result = $this->_search($this->{test_web},
+			     "Kino",
+			     $this->{test_user_wikiname},
+			     "form:BasicForm");
+
+    $this->assert_matches("TopicWithForm", $result, "TopicWithForm not found");
+}
+
+# form_name:BasicForm
+# form_name: was what the old code specified, but the docs always said it should have been form:
+# we support both
+sub test_search_form_name {
+    my $this = shift;
+    my $result;
+
+    my $ind = Foswiki::Contrib::KinoSearchContrib::Index->newCreateIndex();
+    $ind->createIndex();
+
+    $result = $this->_search($this->{test_web},
+			     "Kino",
+			     $this->{test_user_wikiname},
+			     "form_name:BasicForm");
+
+    $this->assert_matches("TopicWithForm", $result, "TopicWithForm not found");
+}
+
+# test the current form_field functionality
+sub test_search_form_field {
+    my $this = shift;
+    my $result;
+    
+    # oddly, this seems to make the test pass, as the WEBFORMS preference gets picked up
+    $this->registerUser("TestUser2", "User", "TestUser2", 'testuser@an-address.net');
+
+    my $ind = Foswiki::Contrib::KinoSearchContrib::Index->newCreateIndex();
+    $ind->createIndex();
+
+    $result = $this->_search($this->{test_web},
+			     "Kino",
+			     $this->{test_user_wikiname},
+			     "TopicClassification:DeveloperDocumentation");
+
+    $this->assert_matches("TopicWithForm", $result, "TopicWithForm not found");
 }
 
 # I check, if the access rights of the users are checked.

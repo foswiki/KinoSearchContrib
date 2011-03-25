@@ -1,4 +1,7 @@
 # Test for Index.pm
+#
+# NOTE: First ensure that the tests for StringifierContrib are working, otherwise some of these will fail
+#
 package IndexTests;
 use FoswikiFnTestCase;
 our @ISA = qw( FoswikiFnTestCase );

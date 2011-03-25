@@ -92,7 +92,7 @@ If you add other file extensions, they are treated as ASCII files. If needed, yo
 
 ---+++ Indexing of Form Fields
 
-All form fields are indexed. For this, the form templates are checked and the included fields are indexed. Additionally the name of the form of a topic is stored in the field =form_name=. How to search for this is described below.
+All form fields are indexed. For this, the form templates are checked and the included fields are indexed. Additionally the name of the form of a topic is stored in the field =form=.
 
 __Note__: With =kinoupdate= only the form fields that existed at the time the initial index was created are indexed. Thus if you add a form or if you add a new field to an existing form, you should create a new index with =kinoindex=.
 
