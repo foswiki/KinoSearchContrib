@@ -134,10 +134,12 @@ Finally, the following settings have been renamed:
 -->
 
 |  Author(s): | Foswiki:Main.MarkusHesse, Foswiki:Main.SvenDowideit & Foswiki:Main.AndrewJones |
-|  Copyright:  | &copy; 2007 Foswiki:Main.MarkusHesse; &copy; 2009,2010 Foswiki Contributors |
+|  Copyright:  | &copy; 2007 Foswiki:Main.MarkusHesse; &copy; 2009 - 2011 Foswiki Contributors |
 |  Release: | %$RELEASE% |
 |  Version: | %$VERSION% |
 |  Change History: | <!-- versions below in reverse order -->&nbsp; |
+|  25 Mar 2011:  | v 1.28. Foswikitask:Item9731: fix searching on =form:NameOfSomeForm=; Foswikitask:Item8632: move =kinosearch/= to =working/work_areas/KinoSearchContrib=; remove unused config -- Foswiki:Main.AndrewJones |
+|  01 Dec 2010:  | Foswikitask:Item9311: using Stringifier instead of !StringifierContrib; minor improvements rendering search results -- Foswiki:Main.MichaelDaum |
 |  04 Sep 2010:  | v 1.27, Use the ICON macro as it is documented, instead of calling a function that was removed in 1.1.  Also =$websStr= can be undef in =searchStringForWebs()=, so it is best to check that it is defined before testing it with a regex.  -- Foswiki:Main.MichaelTempest |
 |  14 Jul 2010:  | v 1.26, removed the =ks_test_ script. Use the =stringify= script from Foswiki:Extensions.StringifierContrib instead |
 |  06 Jun 2010:  | v 1.25, Foswikitask:Item8629: refactored to use Foswiki::Extensions.StringifierContrib -- Foswiki:Main.AndrewJones |

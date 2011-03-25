@@ -1,7 +1,7 @@
 #!/usr/bin/perl -wT
 #
 # Copyright (C) 2007 Markus Hesse
-# Copyright (C) 2009 Foswiki Contributors
+# Copyright (C) 2009 - 2011 Foswiki Contributors
 #
 # For licensing info read LICENSE file in the Foswiki root.
 # This program is free software; you can redistribute it and/or

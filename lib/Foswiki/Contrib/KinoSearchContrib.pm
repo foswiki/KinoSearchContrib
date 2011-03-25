@@ -1,6 +1,6 @@
 # AddOn for Foswiki - The Free and Open Source Wiki, http://foswiki.org/
 #
-# Copyright (C) 2009 Foswiki Contributors
+# Copyright (C) 2009 - 2011 Foswiki Contributors
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -20,6 +20,6 @@ use strict;
 use vars qw( $VERSION $RELEASE $SHORTDESCRIPTION );
 
 our $VERSION = '$Rev: 4913 $';
-our $RELEASE = '1.27';
+our $RELEASE = '1.28';
 our $SHORTDESCRIPTION = 'Fast indexed search including attachments like Word, Excel, and PDF';
 
