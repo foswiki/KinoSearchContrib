@@ -175,6 +175,36 @@ sub test_search {
     $this->assert_matches("TopicWithoutAttachment", $result, "TopicWithoutAttachment not found");
 }
 
+sub test_text_search {
+    my $this = shift;
+    my $result;
+
+    my $ind = Foswiki::Contrib::KinoSearchContrib::Index->newCreateIndex();
+    $ind->createIndex();
+
+    $result = $this->_search($this->{test_web},
+			     "text:Kino",
+			     $this->{test_user_wikiname},
+			     "startpoint");
+
+    $this->assert_matches("TopicWithoutAttachment", $result, "TopicWithoutAttachment not found");
+}
+
+sub test_web_search {
+    my $this = shift;
+    my $result;
+
+    my $ind = Foswiki::Contrib::KinoSearchContrib::Index->newCreateIndex();
+    $ind->createIndex();
+
+    $result = $this->_search($this->{test_web},
+			     "web:$this->{test_web} Kino",
+			     $this->{test_user_wikiname},
+			     "startpoint");
+
+    $this->assert_matches("TopicWithoutAttachment", $result, "TopicWithoutAttachment not found");
+}
+
 sub test_searchAttachments {
     my $this = shift;
     my $search = Foswiki::Contrib::KinoSearchContrib::Search->newSearch();
