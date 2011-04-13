@@ -20,8 +20,8 @@ package Foswiki::Contrib::KinoSearchContrib::Index;
 use Foswiki::Contrib::KinoSearchContrib::KinoSearch;
 our @ISA = qw( Foswiki::Contrib::KinoSearchContrib::KinoSearch );
 
-use KinoSearch::InvIndexer;
-use KinoSearch::Analysis::PolyAnalyzer;
+use KinoSearch1::InvIndexer;
+use KinoSearch1::Analysis::PolyAnalyzer;
 
 use Foswiki::Contrib::Stringifier ();
 use strict;
@@ -133,7 +133,7 @@ sub updateIndex {
 sub indexer {
     my ( $self, $analyzer, $create, %fieldNames ) = @_;
 
-    my $invindexer = KinoSearch::InvIndexer->new(
+    my $invindexer = KinoSearch1::InvIndexer->new(
         invindex => $self->indexPath(),
         create   => $create,
         analyzer => $analyzer,
@@ -270,7 +270,7 @@ sub removeTopics {
     foreach my $topic (@topicsList) {
         $self->log("Remove Topic $topic");
 
-        my $term = KinoSearch::Index::Term->new( 'id_topic', $web . $topic );
+        my $term = KinoSearch1::Index::Term->new( 'id_topic', $web . $topic );
         $invindexer->delete_docs_by_term($term);
 
         my @attachments = $self->attachmentsOfTopic( $web, $topic );
@@ -291,7 +291,7 @@ sub removeTopics {
                 {
 
                     $self->log("Removing attachment $web.$topic.$name");
-                    my $term = KinoSearch::Index::Term->new( 'id_topic',
+                    my $term = KinoSearch1::Index::Term->new( 'id_topic',
                         $web . $topic . $name );
 
                     $invindexer->delete_docs_by_term($term);

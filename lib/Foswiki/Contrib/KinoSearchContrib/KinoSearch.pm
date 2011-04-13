@@ -24,10 +24,9 @@ use Error qw( :try );
 use Time::Local;
 use IO::File;
 
-use KinoSearch::InvIndexer;
-use KinoSearch::Analysis::PolyAnalyzer;
+use KinoSearch1::InvIndexer;
+use KinoSearch1::Analysis::PolyAnalyzer;
 
-#use Foswiki::Contrib::KinoSearchContrib::Stringifier;
 use strict;
 
 # Create a new instance of self.
@@ -192,7 +191,7 @@ sub debugPref {
 sub analyser {
     my ($self, $language) = @_;
 
-    return KinoSearch::Analysis::PolyAnalyzer->new( language => $language);
+    return KinoSearch1::Analysis::PolyAnalyzer->new( language => $language);
 }
 
 1;

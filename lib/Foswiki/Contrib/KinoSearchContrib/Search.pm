@@ -20,9 +20,9 @@ package Foswiki::Contrib::KinoSearchContrib::Search;
 use Foswiki::Contrib::KinoSearchContrib::KinoSearch;
 our @ISA = qw( Foswiki::Contrib::KinoSearchContrib::KinoSearch );
 
-use KinoSearch::Searcher;
-use KinoSearch::Analysis::PolyAnalyzer;
-use KinoSearch::QueryParser::QueryParser;
+use KinoSearch1::Searcher;
+use KinoSearch1::Analysis::PolyAnalyzer;
+use KinoSearch1::QueryParser::QueryParser;
 
 # New instance to search the index
 # QS
@@ -299,7 +299,7 @@ sub docsForQuery {
 
     my $analyser = $self->analyser( $self->analyserLanguage() );
 
-    my $parser = KinoSearch::QueryParser::QueryParser->new(
+    my $parser = KinoSearch1::QueryParser::QueryParser->new(
 		  analyzer => $analyser,
 		  fields   => [ 'topic', 'bodytext', 'author' ],
 		  default_boolop => 'AND'					   
@@ -311,14 +311,14 @@ sub docsForQuery {
 
     my $kinoquery = $parser->parse($search); 
 
-    my $searcher = KinoSearch::Searcher->new(
+    my $searcher = KinoSearch1::Searcher->new(
                                 invindex => $self->indexPath(),
 				analyzer => $analyser
 					     );
 
     my $docs = $searcher->search(query => $kinoquery);
 
-    my $highlighter = KinoSearch::Highlight::Highlighter->new( 
+    my $highlighter = KinoSearch1::Highlight::Highlighter->new( 
         excerpt_field  => 'bodytext',
 	excerpt_length => $self->summaryLength(),
 	);
