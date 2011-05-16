@@ -27,6 +27,8 @@ use Foswiki::Contrib::Stringifier ();
 use strict;
 
 use Foswiki::Form;
+use Foswiki::Func;
+use Error qw(:try);
 
 # New instance to create the index
 # QS
@@ -387,13 +389,17 @@ sub formsFieldNames {
 # NOTE: I use a new session with the admin user so that I can access any topic
 # even when an access control is defined
 #TODO: SMELL: this is a horrible waste of resources, creating _ONE_ Foswiki object may be justified
-            my $form =
-              Foswiki::Form->new( new Foswiki( $Foswiki::cfg{AdminUserLogin} ),
-                $web, $formName );
-            foreach my $fieldDef ( @{ $form->{fields} } ) {
-                my $fldName = $fieldDef->{name};
-                $fieldNames{$fldName} = 1 unless $fldName eq "";
-            }
+            try {
+                my $form =
+                  Foswiki::Form->new( new Foswiki( $Foswiki::cfg{AdminUserLogin} ),
+                    $web, $formName );
+                foreach my $fieldDef ( @{ $form->{fields} } ) {
+                    my $fldName = $fieldDef->{name};
+                    $fieldNames{$fldName} = 1 unless $fldName eq "";
+                }
+            } catch Foswiki::OopsException with {
+                # form not found
+            };
         }
     }
 

@@ -138,11 +138,12 @@ Finally, the following settings have been renamed:
 |  Release: | %$RELEASE% |
 |  Version: | %$VERSION% |
 |  Change History: | <!-- versions below in reverse order -->&nbsp; |
-|  13 Apr 2011:  | v 1.29. Foswikitask:Item10291: use =!KinoSearch1= library |
-|  25 Mar 2011:  | v 1.28. Foswikitask:Item9731: fix searching on =form:NameOfSomeForm=; Foswikitask:Item8632: move =kinosearch/= to =working/work_areas/KinoSearchContrib=; remove unused config -- Foswiki:Main.AndrewJones |
+|  16 May 2011:  | v 1.30, Foswikitask:Item10746: Index shouldn't crash on bad =WEBFORMS= setting  -- Foswiki:Main.AndrewJones |
+|  13 Apr 2011:  | v 1.29, Foswikitask:Item10291: use =!KinoSearch1= library -- Foswiki:Main.AndrewJones |
+|  25 Mar 2011:  | v 1.28, Foswikitask:Item9731: fix searching on =form:NameOfSomeForm=; Foswikitask:Item8632: move =kinosearch/= to =working/work_areas/KinoSearchContrib=; remove unused config -- Foswiki:Main.AndrewJones |
 |  01 Dec 2010:  | Foswikitask:Item9311: using Stringifier instead of !StringifierContrib; minor improvements rendering search results -- Foswiki:Main.MichaelDaum |
 |  04 Sep 2010:  | v 1.27, Use the ICON macro as it is documented, instead of calling a function that was removed in 1.1.  Also =$websStr= can be undef in =searchStringForWebs()=, so it is best to check that it is defined before testing it with a regex.  -- Foswiki:Main.MichaelTempest |
-|  14 Jul 2010:  | v 1.26, removed the =ks_test_ script. Use the =stringify= script from Foswiki:Extensions.StringifierContrib instead |
+|  14 Jul 2010:  | v 1.26, removed the =ks_test_ script=. Use the =stringify= script from Foswiki:Extensions.StringifierContrib instead |
 |  06 Jun 2010:  | v 1.25, Foswikitask:Item8629: refactored to use Foswiki::Extensions.StringifierContrib -- Foswiki:Main.AndrewJones |
 |  14 Apr 2010:  | v 1.24, Foswikitask:Item8426: fix typo in Index.pm |
 |  11 Mar 2010:  | v 1.23, Foswikitask:Item8581: fix executable permission bits, fix typos, add dependency CPAN:Text::Iconv, flushes log files, move =kinosearch/bin= files to standard =tools= location -- Foswiki:Main.WillNorris |
