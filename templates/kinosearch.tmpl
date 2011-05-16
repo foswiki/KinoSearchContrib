@@ -15,7 +15,7 @@
 
 
 %TMPL:DEF{"repeatedsearchblock"}%<h4 class="patternSearchResultsHeader" style="background-color:%WEBBGCOLOR%"><span class="foswikiLeft">%MAKETEXT{"Search results"}%</span><span class="foswikiRight">%MAKETEXT{"retrieved at [_1]" args="%DISPLAYTIME{"$hour:$min ($tz)"}%"}%</span><br class="foswikiClear" /></h4>
-%REPEAT%<div class="patternSearchResult"><div class="foswikiTopRow"><div class="foswikiLeft">%ICON% <b>%MATCH%</b> %SCORE%<span class="foswikiAlert">%LOCKED%</span></div><div class="foswikiRight foswikiSRAuthor"> %AUTHOR%</div><div class="foswikiRight foswikiSRRev">%REVISION% - <a href="%SCRIPTURLPATH{"rdiff"}%/%WEB%/%TOPICNAME%" rel='nofollow'>%TIME%</a>&nbsp;</div><br class="foswikiClear" /></div><div class="foswikiBottomRow"><div class="foswikiSummary foswikiBlackText">%TEXTHEAD%</div></div></div>%REPEAT%%TMPL:END%
+%REPEAT%<div class="patternSearchResult"><div class="foswikiTopRow"><div class="foswikiLeft">%ICON% <b>%MATCH%</b> <span class="foswikiAlert">%LOCKED%</span></div><div class="foswikiRight foswikiSRAuthor"> %AUTHOR%</div><div class="foswikiRight foswikiSRRev">%REVISION% - <a href="%SCRIPTURLPATH{"rdiff"}%/%WEB%/%TOPICNAME%" rel='nofollow'>%TIME%</a>&nbsp;</div><br class="foswikiClear" /></div><div class="foswikiBottomRow"><div class="foswikiSummary foswikiBlackText">%TEXTHEAD%</div></div></div>%REPEAT%%TMPL:END%
 
 
 
