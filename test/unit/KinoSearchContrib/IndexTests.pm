@@ -278,7 +278,7 @@ sub test_changedTopics {
     $this->_createTopicWithoutAttachment();  
     my $ind = Foswiki::Contrib::KinoSearchContrib::Index->newCreateIndex();
 
-    # The "+1" is a littel trick: The Topics created in set_up may have the same 
+    # The "+1" is a little trick: The Topics created in set_up may have the same 
     # timestamp as time(). Wiht time()+1 I ensure, that the timestamp is bigger.
     my $start_time = time()+1;
     $ind->saveUpdateMarker($this->{test_web}, $start_time);
@@ -543,32 +543,6 @@ sub test_saveUpdateMarker{
 
     my $red_time = $ind->readUpdateMarker($this->{test_web});
     $this->assert_str_equals($start_time, $red_time, "Red time does not fit saved time.");
-}
-
-sub test_readChanges {
-    my $this = shift;
-    my $ind = Foswiki::Contrib::KinoSearchContrib::Index->newCreateIndex();
-
-    Foswiki::Func::saveTopicText( $this->{test_web}, "NewOrChangedTopic", <<'HERE');
-Just an example topic
-Keyword: startpoint
-HERE
-	Foswiki::Func::saveTopicText( $this->{test_web}, "NewOrChangedTopic", <<'HERE');
-Just an example topic: Updated
-Keyword: startpoint
-HERE
-
-    my @changes = $ind->readChanges($this->{test_web});
-    my $change;
-
-    $this->assert(@changes, "Changes not returned.");
-
-    # The first change should be the one I just did. 
-    foreach $change (reverse @changes ){
-	my ($topicName, $userName, $changeTime, $revision) = split( /\t/, $change);
-	$this->assert_str_equals($topicName, "NewOrChangedTopic", "Last change not detected.");
-	last;
-    }
 }
 
 sub test_tripFirstchar {

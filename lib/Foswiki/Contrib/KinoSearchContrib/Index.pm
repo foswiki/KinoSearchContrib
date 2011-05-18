@@ -210,10 +210,7 @@ sub attachmentsOfTopic {
 sub changedTopics {
     my ( $self, $web ) = (@_);
 
-    my @changes = $self->readChanges($web);
-    my $change;
-    my $prevLastmodify = $self->readUpdateMarker($web) || "0";
-    my $currLastmodify = "";
+    my $lastmodify = $self->readUpdateMarker($web) || "0";
     my @topicsToUpdate;
 
     # get the list of topics not to be indexed
@@ -221,33 +218,24 @@ sub changedTopics {
     
     # do not process the same topic twice
     my %exclude;
-
-    # process the web changes
-    foreach $change ( reverse @changes ) {
-
-        # Parse lines from .changes:
-        # <topic>	<user>		<change time>	<revision>
-        my ( $topicName, $userName, $changeTime, $revision ) =
-          split( /\t/, $change );
-          
-        next if ( ( !defined $topicName ) || (!$change) || ( $skipTopics{"$web.$topicName"} ) || ( $skipTopics{$topicName} ) );
-
+    
+    my $iterator = Foswiki::Func::eachChangeSince($web, $lastmodify);
+    while ($iterator->hasNext()) {
+        my $change = $iterator->next();
+        my $topicName = $change->{topic};
+        
+        next if( ( $skipTopics{"$web.$topicName"} ) || ( $skipTopics{$topicName} ) );
+        
         if ( ( !%exclude ) || ( !$exclude{$topicName} ) ) {
 
             if ( !defined($topicName) ) {
                 next;
             }
-
-            if ( $prevLastmodify > $changeTime ) {
-
-                # found item of last update
-                last;
-            }
-
-            $exclude{$topicName} = "1";
-            push( @topicsToUpdate, $topicName );
         }
+        $exclude{$topicName} = "1";
+        push( @topicsToUpdate, $topicName );
     }
+    
     return @topicsToUpdate;
 }
 
@@ -734,24 +722,6 @@ sub readUpdateMarker {
             my $data = <$FILE>;
             close($FILE);
             return $data;
-        }
-    }
-    return '';
-}
-
-# QS
-sub readChanges {
-    my ( $self, $web ) = @_;
-
-    my $changes_file = $Foswiki::cfg{DataDir} . "/$web/.changes";
-
-    # SMELL: could we use Foswiki::Func::eachChangeSince?
-    if ( -e $changes_file ) {
-        my $FILE;
-        if (open( $FILE, "<$changes_file" )) {
-            my @data = <$FILE>;
-            close($FILE);
-            return @data;
         }
     }
     return '';

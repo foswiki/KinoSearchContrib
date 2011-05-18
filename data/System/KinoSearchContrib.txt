@@ -138,6 +138,7 @@ Finally, the following settings have been renamed:
 |  Release: | %$RELEASE% |
 |  Version: | %$VERSION% |
 |  Change History: | <!-- versions below in reverse order -->&nbsp; |
+|  18 May 2011:  | v 1.31, Foswikitask:Item10765: use API rather than read =.changes= file directly -- Foswiki:Main.AndrewJones |
 |  16 May 2011:  | v 1.30, Foswikitask:Item10746: Index shouldn't crash on bad =WEBFORMS= setting; Foswikitask:Item10742: Should not display search score as part of results  -- Foswiki:Main.AndrewJones |
 |  13 Apr 2011:  | v 1.29, Foswikitask:Item10291: use =!KinoSearch1= library -- Foswiki:Main.AndrewJones |
 |  25 Mar 2011:  | v 1.28, Foswikitask:Item9731: fix searching on =form:NameOfSomeForm=; Foswikitask:Item8632: move =kinosearch/= to =working/work_areas/KinoSearchContrib=; remove unused config -- Foswiki:Main.AndrewJones |
