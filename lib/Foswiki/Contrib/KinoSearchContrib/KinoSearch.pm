@@ -12,7 +12,7 @@
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details, published at 
+# GNU General Public License for more details, published at
 # http://www.gnu.org/copyleft/gpl.html
 # Set library paths in @INC, at compile time
 
@@ -35,40 +35,41 @@ use strict;
 sub new {
     my $handler = shift;
     my $type    = shift;
-    my $self = bless {}, $handler;
+    my $self    = bless {}, $handler;
 
-    if (!($type eq "search") ) {$self->{Log} = $self->openLog($type)};
-    $self->{Debug}   = $self->debugPref();
+    if ( !( $type eq "search" ) ) { $self->{Log} = $self->openLog($type) }
+    $self->{Debug} = $self->debugPref();
 
-    $self
+    $self;
 }
 
 sub openLog {
-    my ($self, $type) = (@_);
+    my ( $self, $type ) = (@_);
 
-    my $LOGFILE = new IO::File;
+    my $LOGFILE  = new IO::File;
     my $fileName = $self->logFileName($type);
 
-    $LOGFILE->open(">>$fileName") || die "Logfile cannot be opened at $fileName.";
+    $LOGFILE->open(">>$fileName")
+      || die "Logfile cannot be opened at $fileName.";
     autoflush $LOGFILE;
 
     $LOGFILE;
 }
 
 sub log {
-    my ($self, $logString, $force) = (@_);
- 
-    if ($self->{Debug} || $force || 0) {
-	my $logtime = Foswiki::Func::formatTime( time(), '$rcs', 'servertime' ); 
-	$self->{Log}->print( "| $logtime | $logString |\n");
+    my ( $self, $logString, $force ) = (@_);
 
-	#print STDERR "$logString\n";
+    if ( $self->{Debug} || $force || 0 ) {
+        my $logtime = Foswiki::Func::formatTime( time(), '$rcs', 'servertime' );
+        $self->{Log}->print("| $logtime | $logString |\n");
+
+        #print STDERR "$logString\n";
     }
-    $self->{Debug} && Foswiki::Func::writeDebug( $logString );
+    $self->{Debug} && Foswiki::Func::writeDebug($logString);
 }
 
 # Yields the directory, I want to do logs
-# I take $Foswiki::cfg{KinoSearchLogDir} or if not given 
+# I take $Foswiki::cfg{KinoSearchLogDir} or if not given
 # Foswiki::Func::getPubDir()/../kinosearch/logs
 # QS
 sub logDirName {
@@ -76,25 +77,25 @@ sub logDirName {
 
     # by calling, we know it will be created
     my $work_area = Foswiki::Func::getWorkArea('KinoSearchContrib');
-    if (!$log) {
+    if ( !$log ) {
         $log = "$work_area/logs";
     }
-    
-    unless( -d $log ){
-        mkdir($log , 0777);
+
+    unless ( -d $log ) {
+        mkdir( $log, 0777 );
     }
-    
+
     return $log;
 }
 
 sub logFileName {
-    my ($self, $prefix) = (@_);
+    my ( $self, $prefix ) = (@_);
     my $logdir = logDirName();
-    my $time = Foswiki::Func::formatTime( time(), '$year$mo$day', 'servertime');
+    my $time =
+      Foswiki::Func::formatTime( time(), '$year$mo$day', 'servertime' );
 
     return "$logdir/$prefix-$time.log";
 }
-
 
 # Path where the index is stored
 # QS
@@ -103,12 +104,12 @@ sub indexPath {
 
     # by calling, we know it will be created
     my $work_area = Foswiki::Func::getWorkArea('KinoSearchContrib');
-    if (!$idx) {
-        $idx ="$work_area/index";
+    if ( !$idx ) {
+        $idx = "$work_area/index";
     }
-    
-    unless( -d $idx ){
-        mkdir($idx , 0777);
+
+    unless ( -d $idx ) {
+        mkdir( $idx, 0777 );
     }
 
     return $idx;
@@ -117,18 +118,19 @@ sub indexPath {
 # Path where the attachments are stored.
 # QS
 sub pubPath {
-    return Foswiki::Func::getPubDir(); 
+    return Foswiki::Func::getPubDir();
 }
 
 # List of webs that shall not be indexed
 # QS
 sub skipWebs {
-    
-    my $to_skip = $Foswiki::cfg{KinoSearchContrib}{SkipWebs} || "Trash, Sandbox";
+
+    my $to_skip = $Foswiki::cfg{KinoSearchContrib}{SkipWebs}
+      || "Trash, Sandbox";
     my %skipwebs;
 
     foreach my $tmpweb ( split( /\,\s+|\,|\s+/, $to_skip ) ) {
-	$skipwebs{$tmpweb} = 1;
+        $skipwebs{$tmpweb} = 1;
     }
     return %skipwebs;
 }
@@ -140,9 +142,9 @@ sub skipAttachments {
     my %skipattachments;
 
     foreach my $tmpattachment ( split( /\,\s+/, $to_skip ) ) {
-	$skipattachments{$tmpattachment} = 1;
+        $skipattachments{$tmpattachment} = 1;
     }
-    
+
     return %skipattachments;
 }
 
@@ -152,20 +154,21 @@ sub skipTopics {
     my %skiptopics;
 
     foreach my $t ( split( /\,\s+/, $to_skip ) ) {
-	$skiptopics{$t} = 1;
+        $skiptopics{$t} = 1;
     }
-    
+
     return %skiptopics;
 }
 
 # List of file extensions to be indexed
 # QS
 sub indexExtensions {
-    my $extensions = $Foswiki::cfg{KinoSearchContrib}{IndexExtensions} || ".txt, .html, .xml, .doc, .docx, .xls, .xlsx, .ppt, .pptx, .pdf";
+    my $extensions = $Foswiki::cfg{KinoSearchContrib}{IndexExtensions}
+      || ".txt, .html, .xml, .doc, .docx, .xls, .xlsx, .ppt, .pptx, .pdf";
     my %indexextensions;
 
     foreach my $tmpextension ( split( /\,\s+/, $extensions ) ) {
-	$indexextensions{$tmpextension} = 1;
+        $indexextensions{$tmpextension} = 1;
     }
 
     return %indexextensions;
@@ -189,9 +192,9 @@ sub debugPref {
 # Returns an analyser
 # QS
 sub analyser {
-    my ($self, $language) = @_;
+    my ( $self, $language ) = @_;
 
-    return KinoSearch1::Analysis::PolyAnalyzer->new( language => $language);
+    return KinoSearch1::Analysis::PolyAnalyzer->new( language => $language );
 }
 
 1;

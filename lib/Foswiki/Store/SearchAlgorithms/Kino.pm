@@ -42,14 +42,14 @@ sub search {
 # be used for partial matches on anything.
 
     #just a bit experimental
-    my $showAttachments = $Foswiki::cfg{KinoSearchContrib}{showAttachments} || 0;
-
+    my $showAttachments = $Foswiki::cfg{KinoSearchContrib}{showAttachments}
+      || 0;
 
     my $scope = $options->{scope} || 'text';
+
 #print STDERR "search : type=$options->{type}, scope=$scope ($searchString) (".scalar(@$topics).")\n";
 
-    my $searcher =
-      Foswiki::Contrib::KinoSearchContrib::Search->newSearch();
+    my $searcher = Foswiki::Contrib::KinoSearchContrib::Search->newSearch();
 
     if ( $options->{type} eq 'regex' ) {
 
@@ -73,29 +73,37 @@ sub search {
 
     my $scopePrefix = '';
     if ( $scope eq 'all' ) {
-	$scopePrefix = '';
-    } elsif ( $scope eq 'attachments' ) {
-	#damnit, Foswiki::Search excludes this
-	#$searchAttachments = " AND (attachment:yes)"
-	$showAttachments = 1;
-    } elsif ( $scope eq 'topic' ) {
-	$scopePrefix = 'topic:';
-    } elsif ( $scope eq 'text' ) {
-	#$scopePrefix = 'bodytext:';
+        $scopePrefix = '';
+    }
+    elsif ( $scope eq 'attachments' ) {
+
+        #damnit, Foswiki::Search excludes this
+        #$searchAttachments = " AND (attachment:yes)"
+        $showAttachments = 1;
+    }
+    elsif ( $scope eq 'topic' ) {
+        $scopePrefix = 'topic:';
+    }
+    elsif ( $scope eq 'text' ) {
+
+        #$scopePrefix = 'bodytext:';
     }
 
     my $search = $searchString;
     if ( $options->{type} eq 'text' ) {
-        $search = $scopePrefix.$search;
-    } elsif ( $options->{type} eq 'keyword' ) {
-        $search = $scopePrefix.$search;
-    } elsif ( $options->{type} eq 'literal' ) {
-        $search = $scopePrefix.'"'.$search.'"';
+        $search = $scopePrefix . $search;
+    }
+    elsif ( $options->{type} eq 'keyword' ) {
+        $search = $scopePrefix . $search;
+    }
+    elsif ( $options->{type} eq 'literal' ) {
+        $search = $scopePrefix . '"' . $search . '"';
     }
     elsif ( $options->{type} eq 'all' ) {
-	#'all' can't really work well with pluggable search options from this point in the code
-	#the 'agregation needs to happen in Foswiki::Search
-	#TODO: need to separate out free form strings and other terms - the terms (including web: don't work so well inside topic:
+
+#'all' can't really work well with pluggable search options from this point in the code
+#the 'agregation needs to happen in Foswiki::Search
+#TODO: need to separate out free form strings and other terms - the terms (including web: don't work so well inside topic:
     }
     else {
 
@@ -113,7 +121,7 @@ sub search {
     #actually need to just do _this_ Store's web.
     $search = $searcher->searchStringForWebs( $search, $web );
 
-#print STDERR "Kino: $search\n";
+    #print STDERR "Kino: $search\n";
 
     #do the search.
     my $docs = $searcher->docsForQuery($search);
@@ -121,7 +129,7 @@ sub search {
     my $ntopics = 0;
 
     my %seen;
-    
+
     # output the list of hits
     while ( my $hit = $docs->fetch_hit_hashref ) {
         my $resweb   = $hit->{web};
@@ -140,24 +148,28 @@ sub search {
         #$text =~ s/%TOPIC%/$restopic/gos;
         #my $text;
 
-     # Check that the topic can be viewed. (iirc this is done in Foswiki::Search.)
-     #	    if (! $self->topicAllowed($restopic, $resweb,  $text, $remoteUser)) {
-     #	        next;
-     #	    }
+   # Check that the topic can be viewed. (iirc this is done in Foswiki::Search.)
+   #	    if (! $self->topicAllowed($restopic, $resweb,  $text, $remoteUser)) {
+   #	        next;
+   #	    }
 
-	if ($hit->{attachment}) {
-	    if (($showAttachments) &&
-                ( $scope eq 'all' ) ){
-		my $name = $hit->{name};
-		my $url = " %PUBURL%/$resweb/$restopic/$name ";
-#print STDERR "$resweb.$restopic - $name\n";
-		push( @{ $seen{$url} }, $url );
-	    }
-	} else {
-	    #assume its a topic.
-#print STDERR "$resweb.$restopic\n";
+        if ( $hit->{attachment} ) {
+            if (   ($showAttachments)
+                && ( $scope eq 'all' ) )
+            {
+                my $name = $hit->{name};
+                my $url  = " %PUBURL%/$resweb/$restopic/$name ";
+
+                #print STDERR "$resweb.$restopic - $name\n";
+                push( @{ $seen{$url} }, $url );
+            }
+        }
+        else {
+
+            #assume its a topic.
+            #print STDERR "$resweb.$restopic\n";
             push( @{ $seen{"$restopic"} }, $hit->{excerpt} );
-	}
+        }
     }
 
     return \%seen;

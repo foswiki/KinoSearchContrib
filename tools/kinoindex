@@ -12,13 +12,13 @@
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details, published at 
+# GNU General Public License for more details, published at
 # http://www.gnu.org/copyleft/gpl.html
 
 # Set library paths in @INC, at compile time
 BEGIN {
     unshift @INC, '.';
-    unshift @INC, '../bin'; # SMELL: argh where's the foswiki installation
+    unshift @INC, '../bin';    # SMELL: argh where's the foswiki installation
     require 'setlib.cfg';
     require 'LocalSite.cfg';
 }
@@ -27,7 +27,7 @@ use Foswiki;
 use Foswiki::Contrib::KinoSearchContrib::Index;
 use strict;
 
-my $debug = ! ( @ARGV && $ARGV[0] eq "-q" );
+my $debug = !( @ARGV && $ARGV[0] eq "-q" );
 
 $debug && print "KinoSearch index files init\n";
 $debug && print "- to suppress all normal output: kinoindex -q\n";
@@ -37,4 +37,4 @@ my $foswiki = new Foswiki();
 my $indexer = Foswiki::Contrib::KinoSearchContrib::Index->newCreateIndex();
 $indexer->createIndex($debug)
 
-# EOF
+  # EOF

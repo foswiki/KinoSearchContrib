@@ -12,7 +12,7 @@
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details, published at 
+# GNU General Public License for more details, published at
 # http://www.gnu.org/copyleft/gpl.html
 
 # Set library paths in @INC, at compile time
@@ -32,7 +32,7 @@ BEGIN {
         $SIG{__DIE__} = \&Carp::confess;
     }
     $ENV{FOSWIKI_ACTION} = 'kinosearch';
-    @INC = ('.', grep { $_ ne '.' } @INC);
+    @INC = ( '.', grep { $_ ne '.' } @INC );
     require 'setlib.cfg';
 }
 

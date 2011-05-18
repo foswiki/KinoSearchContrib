@@ -17,17 +17,17 @@
 # Set library paths in @INC, at compile time
 
 package Foswiki::Contrib::KinoSearchContrib::Index;
+use strict;
+
 use Foswiki::Contrib::KinoSearchContrib::KinoSearch;
 our @ISA = qw( Foswiki::Contrib::KinoSearchContrib::KinoSearch );
 
-use KinoSearch1::InvIndexer;
-use KinoSearch1::Analysis::PolyAnalyzer;
+use KinoSearch1::InvIndexer             ();
+use KinoSearch1::Analysis::PolyAnalyzer ();
 
 use Foswiki::Contrib::Stringifier ();
-use strict;
-
-use Foswiki::Form;
-use Foswiki::Func;
+use Foswiki::Form                 ();
+use Foswiki::Func                 ();
 use Error qw(:try);
 
 # New instance to create the index
@@ -62,7 +62,7 @@ sub createIndex {
     my $invindexer = $self->indexer( $analyzer, 1, %fldNames );
 
     my @webs = $self->websToIndex();
-    
+
     # get the list of topics not to be indexed
     my %skipTopics = $self->skipTopics;
 
@@ -72,8 +72,9 @@ sub createIndex {
         my $start_time = time();
 
         foreach my $topic ( Foswiki::Func::getTopicList($web) ) {
-            next if ( ( $skipTopics{"$web.$topic"} ) || ( $skipTopics{$topic} ) );
-            
+            next
+              if ( ( $skipTopics{"$web.$topic"} ) || ( $skipTopics{$topic} ) );
+
             $self->log("Indexing topic | $web.$topic");
             $self->indexTopic( $invindexer, $web, $topic, %fldNames );
         }
@@ -215,17 +216,19 @@ sub changedTopics {
 
     # get the list of topics not to be indexed
     my %skipTopics = $self->skipTopics;
-    
+
     # do not process the same topic twice
     my %exclude;
-    
-    my $iterator = Foswiki::Func::eachChangeSince($web, $lastmodify);
-    while ($iterator->hasNext()) {
-        my $change = $iterator->next();
+
+    my $iterator = Foswiki::Func::eachChangeSince( $web, $lastmodify );
+    while ( $iterator->hasNext() ) {
+        my $change    = $iterator->next();
         my $topicName = $change->{topic};
-        
-        next if( ( $skipTopics{"$web.$topicName"} ) || ( $skipTopics{$topicName} ) );
-        
+
+        next
+          if ( ( $skipTopics{"$web.$topicName"} )
+            || ( $skipTopics{$topicName} ) );
+
         if ( ( !%exclude ) || ( !$exclude{$topicName} ) ) {
 
             if ( !defined($topicName) ) {
@@ -235,7 +238,7 @@ sub changedTopics {
         $exclude{$topicName} = "1";
         push( @topicsToUpdate, $topicName );
     }
-    
+
     return @topicsToUpdate;
 }
 
@@ -379,13 +382,16 @@ sub formsFieldNames {
 #TODO: SMELL: this is a horrible waste of resources, creating _ONE_ Foswiki object may be justified
             try {
                 my $form =
-                  Foswiki::Form->new( new Foswiki( $Foswiki::cfg{AdminUserLogin} ),
+                  Foswiki::Form->new(
+                    new Foswiki( $Foswiki::cfg{AdminUserLogin} ),
                     $web, $formName );
                 foreach my $fieldDef ( @{ $form->{fields} } ) {
                     my $fldName = $fieldDef->{name};
                     $fieldNames{$fldName} = 1 unless $fldName eq "";
                 }
-            } catch Foswiki::OopsException with {
+            }
+            catch Foswiki::OopsException with {
+
                 # form not found
             };
         }
@@ -408,7 +414,7 @@ sub writeFieldNames {
     my $fName = $self->fieldNamesFileName();
 
     my $FILE;
-    if ( open( $FILE, ">$fName" ) ) {
+    if ( open( $FILE,, ">", $fName ) ) {
         foreach my $name ( keys %fieldNames ) {
             print $FILE $name, "\n";
         }
@@ -427,10 +433,10 @@ sub readFieldNames {
     my %fieldNames;
 
     my $FILE;
-    if ( open( $FILE, "<$fName" ) ) {
+    if ( open( $FILE, "<", $fName ) ) {
         my @names = <$FILE>;
         close($FILE);
-        
+
         foreach my $name (@names) {
             $name =~ s/\n//;
             $fieldNames{$name} = 1;
@@ -450,9 +456,10 @@ sub indexTopic {
     # Eliminate Topic Makup Language elements and newlines.
     # SMELL: using undocumented function...
     my $renderer = $Foswiki::Plugins::SESSION->renderer;
-	my $topicObject = Foswiki::Meta->new( $Foswiki::Plugins::SESSION, $web, $topic );
-	$text = $renderer->TML2PlainText( $text, $topicObject, "" );
-    
+    my $topicObject =
+      Foswiki::Meta->new( $Foswiki::Plugins::SESSION, $web, $topic );
+    $text = $renderer->TML2PlainText( $text, $topicObject, "" );
+
     $text =~ s/\n/ /g;
 
     # "TheTopic--NNNName" will return the "The Topic Name" string
@@ -471,7 +478,8 @@ sub indexTopic {
     $doc->set_value( bodytext => $text );
 
     # processing the topic meta info
-    my ( $date, $author, $rev ) = Foswiki::Func::getRevisionInfo( $web, $topic );
+    my ( $date, $author, $rev ) =
+      Foswiki::Func::getRevisionInfo( $web, $topic );
 
     $date = Foswiki::Func::formatTime($date);
 
@@ -487,17 +495,18 @@ sub indexTopic {
     if ($meta) {
         my $form = $meta->get('FORM');
         if ($form) {
+
             # for legacy reasons, we support form: and form_name:
             $doc->set_value( form_name => $form->{name} );
-            $doc->set_value( form => $form->{name} );
+            $doc->set_value( form      => $form->{name} );
         }
         my @fields = $meta->find('FIELD');
         if (@fields) {
             foreach my $field (@fields) {
                 my $name = $field->{"name"};
-                if ( %fldNames &&  $fldNames{$name}) {
+                if ( %fldNames && $fldNames{$name} ) {
                     my $value = $field->{"value"};
-                    next if (!defined($value)); #field not there.
+                    next if ( !defined($value) );    #field not there.
                     $doc->set_value( $name => $value );
                 }
             }
@@ -560,14 +569,13 @@ sub indexAttachment {
 
     my $pubpath  = $self->pubPath();
     my $filename = "$pubpath/$web/$topic/$name";
+
     #untaint..
     $filename =~ /(.*)/;
     $filename = $1;
-    my $attText =
-      Foswiki::Contrib::Stringifier->stringFor(
-        $filename);
-        
-    return if (!defined($attText)); #attachment may not be there.
+    my $attText = Foswiki::Contrib::Stringifier->stringFor($filename);
+
+    return if ( !defined($attText) );    #attachment may not be there.
 
     # new Kino document for the current topic
     my $doc = $invindexer->new_doc;
@@ -585,7 +593,7 @@ sub indexAttachment {
 
     # processing the topic meta info
     # the author can be used as a search criteria
-    if (defined($author)) {
+    if ( defined($author) ) {
         $doc->set_value( author => $author );
     }
 
@@ -624,8 +632,10 @@ sub splitTopicName {
 
 # I replace each capital letter with a space and the letter itself as long as it follows a lower letter.
 # FIXME: I also want to work with all special characters but this looks quite agly. Is there a better solution?
+#<<<  do not let perltidy touch this
     $string =~
 s/(ä|ö|ü|ß|á|à|â|ç|é|è|ê|ó|ò|ô|ú|ù|û|[a-z]|[1-9])(Ä|Ö|Ü|Á|À|Â|Ç|É|È|Ê|Ó|Ò|Ô|Ú|Ù|Û|[A-Z])/$1 $2/g;
+#>>>
 
     return $string;
 
@@ -658,6 +668,7 @@ sub splitTheTopicName {
 # Fist I strip ut things like "_", ".", ...
 # FIXME: I want to keep special chars but this looks quite agly. Is there a better solution?
     foreach (@fields) {
+#<<<  do not let perltidy touch this
         if (
 /Ä|Ö|Ü|ä|ö|ü|ß|á|Á|à|À|â|Â|ç|Ç|é|É|è|È|ê|Ê|ó|Ó|ò|Ò|ô|Ô|ú|Ú|ù|Ù|û|Û|[A-Z]|[a-z]|[0-9]/
           )
@@ -665,6 +676,7 @@ sub splitTheTopicName {
             $newstr = $newstr . $_;
         }
         else { $newstr = $newstr . " "; }
+#>>>
     }
 
     # I remove all double spaces
@@ -704,7 +716,7 @@ sub saveUpdateMarker {
     my $file = $self->updateMarkerFile($web);
 
     my $FILE;
-    if (open( $FILE, ">$file" )) {
+    if ( open( $FILE, ">", $file ) ) {
         print $FILE $start_time;
         close($FILE);
     }
@@ -718,7 +730,7 @@ sub readUpdateMarker {
 
     if ( -e $file ) {
         my $FILE;
-        if (open( $FILE, "<$file" )) {
+        if ( open( $FILE, "<", $file ) ) {
             my $data = <$FILE>;
             close($FILE);
             return $data;
