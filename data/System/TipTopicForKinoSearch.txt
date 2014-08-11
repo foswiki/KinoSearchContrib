@@ -1,4 +1,4 @@
-%META:TOPICINFO{author="ProjectContributor" date="1208389508" format="1.1" version="$Rev: 4923 $"}%
+%META:TOPICINFO{author="ProjectContributor" date="1407719163" format="1.1" version="1"}%
 %META:TOPICPARENT{name="TipsOfTheDay"}%
 
 ---+ Kino Search Operators

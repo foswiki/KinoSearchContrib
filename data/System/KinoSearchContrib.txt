@@ -1,4 +1,4 @@
-%META:TOPICINFO{author="ProjectContributor" date="1208389508" format="1.1" version="$Rev: 5131 $"}%
+%META:TOPICINFO{author="ProjectContributor" date="1407719165" format="1.1" version="1"}%
 %META:TOPICPARENT{name="Contribs"}%
 ---+ Kino Search Contrib
 
